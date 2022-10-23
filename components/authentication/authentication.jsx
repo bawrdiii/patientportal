@@ -1,18 +1,17 @@
 import Danger from '../../assets/Images/Danger.png'
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
+
 const Authentication = ({ userOnchange,
     userValue,
     userLabelRef,
     passOnchange,
-    passValu,
+    passValue,
     passLabelRef,
     SubmitForm,
     btnOnclick,
-    capslockDetect
+    capslockDetect,
+    checkingCapsLock
 }) => {
-
-
 
 
     return (
@@ -43,8 +42,9 @@ const Authentication = ({ userOnchange,
                             id="password"
                             className="input input-pass"
                             placeholder="Admin pass"
-                            value={passValu}
+                            value={passValue}
                             onChange={passOnchange}
+                            onKeyUp={checkingCapsLock}
                         />
                         <label
                             htmlFor="password"

@@ -1,14 +1,18 @@
-import { useEffect } from "react"
-import Authentication from "../components/authentication/authentication"
+import { useState } from "react"
+import MainAuth from "../components/mainpage/mainAuthentication"
 
 
 
 const MainIndex = () => {
 
-    return (
-        <>
-            <Authentication />
-        </>
-    )
+    const [admin, setAdmin] = useState(false)
+
+    const btnOnclickHandler = e => {
+        e.preventDefault()
+        
+    }
+
+    return <MainAuth buttonOnclickHandler={btnOnclickHandler} />
+
 }
 export default MainIndex
