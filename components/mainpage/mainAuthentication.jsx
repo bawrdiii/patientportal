@@ -4,20 +4,21 @@ import Authentication from "../authentication/authentication";
 
 
 const MainAuth = ({
-    buttonOnclickHandler
+    buttonOnclickHandler,
+    submitForm,
+    headingRef,
+    userInputRef,
+    passInputRef
 }) => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [admin, setAdmin] = useState(false)
 
     //? ref to elements
     const userLabel = useRef()
     const passLabel = useRef()
     const capsLock = useRef()
 
-    // ! Data for login
-    const loginInfo = "admin"
 
     //* checking Caps lock 
     const checkCapsLock = e => {
@@ -50,6 +51,7 @@ const MainAuth = ({
     return (
         <>
             <Authentication
+                headingRef={headingRef}
                 userValue={username}
                 userOnchange={userOnchangeHandler}
                 userLabelRef={userLabel}
@@ -58,8 +60,10 @@ const MainAuth = ({
                 passLabelRef={passLabel}
                 checkingCapsLock={checkCapsLock}
                 capslockDetect={capsLock}
-                SubmitForm={submitHandler}
+                SubmitForm={submitForm}
                 btnOnclick={buttonOnclickHandler}
+                passInputRef={passInputRef}
+                userInputRef={userInputRef}
 
             />
         </>

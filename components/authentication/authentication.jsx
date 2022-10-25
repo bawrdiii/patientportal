@@ -10,14 +10,17 @@ const Authentication = ({ userOnchange,
     SubmitForm,
     btnOnclick,
     capslockDetect,
-    checkingCapsLock
+    checkingCapsLock,
+    headingRef,
+    userInputRef,
+    passInputRef
 }) => {
 
 
     return (
         <>
             <section className="container">
-                <h2 className="welcome-message">Welcome to patient portal</h2>
+                <h2 className="welcome-message" ref={headingRef}>Welcome to patient portal</h2>
                 <form className="main-form" method="post" onSubmit={SubmitForm}>
                     <div className="d-flex flex-form">
                         <input
@@ -28,12 +31,14 @@ const Authentication = ({ userOnchange,
                             placeholder="Administrator"
                             value={userValue}
                             onChange={userOnchange}
+                            ref={userInputRef}
                         />
                         <label
                             htmlFor="username"
                             className="form-label"
                             ref={userLabelRef}
                         >Username</label>
+                        <small className="error-span"></small>
                     </div>
                     <div className="d-flex flex-form p-relative">
                         <input
@@ -45,12 +50,14 @@ const Authentication = ({ userOnchange,
                             value={passValue}
                             onChange={passOnchange}
                             onKeyUp={checkingCapsLock}
+                            ref={passInputRef}
                         />
                         <label
                             htmlFor="password"
                             className="form-label"
                             ref={passLabelRef}
                         >Password</label>
+                        <small className="error-span"></small>
                         <p className='hidden tooltip' ref={capslockDetect}>
                             <span data-text='Caps lock is On!'>
                                 <Image src={Danger} width='20px' height='20px' alt='Caps lock detected' />
