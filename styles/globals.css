@@ -458,3 +458,32 @@ a {
 .patient-container:hover .add-button {
     color: var(--black);
 }
+
+/* ! */
+
+/* ? Form info Styles */
+
+.container-infos {
+    max-width: 500px;
+    margin: .5em auto;
+    background: #5555;
+    padding: .4em;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+
+}
+
+.form-info {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.label-info {
+    max-width: 6em;
+    transform: translate(60px, 22px);
+}
+
+.input-info:focus+.label-info,
+.label-active {
+    transform: translate(50px, 0px);
+}

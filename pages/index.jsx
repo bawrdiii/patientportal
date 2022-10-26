@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import PatientContainer from "../components/add patient/patientContainer"
 import MainAuth from "../components/mainpage/mainAuthentication"
-import Navbar from "../components/Navbar/navbar"
+import Navbar from "../components/navbar/navbar"
 
 
 
