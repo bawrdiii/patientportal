@@ -11,8 +11,11 @@
     --light-blue: #00bbf9;
     --white: #fff;
     --black: #222;
+    --dark-melo: #444;
     --red: #970D1A;
+    --error: #cb0000;
     --purpule: #4e204D;
+    --success: #00a25c;
 }
 
 body {
@@ -116,7 +119,7 @@ a {
 }
 
 .nav-ul>li {
-    font-size: 1.5em;
+    font-size: 18px;
     padding: 0 .5em;
 }
 
@@ -135,7 +138,7 @@ a {
     border-radius: 4px;
     transform: scaleX(0);
     left: 0;
-    bottom: 0;
+    bottom: -3px;
     height: 2px;
     transition: transform .7s ease;
 }
@@ -262,15 +265,57 @@ a {
     opacity: 1;
 }
 
-/* * Error handler  */
-.form-error input {}
+/* * Error or success handler  */
+.form-error {
+    position: relative;
+    margin: .9em 0;
+}
+
+.error-small {
+    position: absolute;
+    bottom: -18px;
+    left: 30px;
+    color: var(--error);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .4s ease, opacity .4s linear;
+}
+
+.form-error input {
+    border-bottom: 1px solid var(--error);
+    border-top: transparent;
+}
+
+.form-error input:focus {
+    border-right-color: var(--error);
+    border-left-color: var(--error);
+}
+
+.form-error .error-small {
+    visibility: visible;
+    opacity: 1;
+}
+
+.form-success .error-small {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.form-success input {
+    border-bottom: 1px solid var(--success);
+}
+
+.form-success input:focus {
+    border-right-color: var(--success);
+    border-left-color: var(--success);
+}
 
 
 /* ! */
 
 .btn-container {
     text-align: center;
-    margin: 1em 0;
+    margin: 1.5em 0;
 }
 
 .btn {
@@ -361,3 +406,55 @@ a {
 }
 
 /* ! */
+
+
+/* ? Patient container Styles */
+
+.patient-container {
+    position: relative;
+    max-width: 150px;
+    min-height: 100px;
+    display: grid;
+    place-content: center;
+    --white: #fffff18c;
+    background-color: var(--white);
+    margin: 1em auto 0 auto;
+    transition: background .4s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.add-label {
+    position: absolute;
+    left: 20px;
+}
+
+.add-button {
+    font-size: 4.3em;
+    --dark-melo: rgba(68, 68, 68, 0.735);
+    color: var(--dark-melo);
+    transition: color .5s ease;
+}
+
+.patient-container::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    left: -35px;
+    height: 100%;
+    --white: #fff;
+    background-color: var(--white);
+    transform: skew(35deg);
+    z-index: -1;
+    width: 0;
+    transition: width 1s;
+}
+
+.patient-container:hover::before {
+    width: 150%;
+}
+
+.patient-container:hover .add-button {
+    color: var(--black);
+}

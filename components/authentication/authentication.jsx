@@ -38,7 +38,7 @@ const Authentication = ({ userOnchange,
                             className="form-label"
                             ref={userLabelRef}
                         >Username</label>
-                        <small className="error-span"></small>
+                        <small className="error-small mb-1"></small>
                     </div>
                     <div className="d-flex flex-form p-relative">
                         <input
@@ -57,7 +57,7 @@ const Authentication = ({ userOnchange,
                             className="form-label"
                             ref={passLabelRef}
                         >Password</label>
-                        <small className="error-span"></small>
+                        <small className="error-small"></small>
                         <p className='hidden tooltip' ref={capslockDetect}>
                             <span data-text='Caps lock is On!'>
                                 <Image src={Danger} width='20px' height='20px' alt='Caps lock detected' />

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Toggle } from "../toggle button/toggle";
 
 
-const Navbar = () => {
+const Navbar = ({ logOutHandler }) => {
 
     const [light, setLight] = useState(true)
 
@@ -39,8 +39,8 @@ const Navbar = () => {
             labelDom.classList.remove("toggle-span-after")
         }
         else if (theme === "Dark") {
-            spanDom.classList.add("toggle-label-after")
-            labelDom.classList.add("toggle-span-after")
+            spanDom.classList.add("toggle-span-after")
+            labelDom.classList.add("toggle-label-after")
 
         }
 
@@ -61,13 +61,20 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href='/'>
+                    <Link href='informations'>
                         <a className="link">
                             Informations
                         </a>
                     </Link>
                 </li>
-            </ul >
+                <li>
+                    <a className="link"
+                        onClick={logOutHandler}
+                    >
+                        Logout
+                    </a>
+                </li>
+            </ul>
         </nav >
     )
 }
