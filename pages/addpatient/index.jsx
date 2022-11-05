@@ -3,9 +3,11 @@ import Navbar from "../../components/navbar/navbar"
 
 const MainPatient = () => {
 
+    const 
+
     return (
         <>
-            <Navbar />
+            <Navbar logOutHandler={} />
             <Addpatient />
         </>
     )
