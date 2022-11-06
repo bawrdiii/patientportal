@@ -8,6 +8,7 @@ import Navbar from "../navbar/navbar"
 const ShowPatient = () => {
     const [patName, setPatName] = useState('')
     const [age, setAge] = useState('')
+    const [ill, setIllness] = useState('')
 
     const router = useRouter()
 
@@ -19,6 +20,7 @@ const ShowPatient = () => {
                 const result = docSanp.data()
                 setPatName(result.patientName)
                 setAge(result.birthDate)
+                setIllness(result.illness)
             }
             getUserData()
         }
@@ -65,15 +67,24 @@ const ShowPatient = () => {
         <>
             <Navbar />
             <section className="exact-patient">
-                <h2>
-                    {patName}
-                </h2>
-                <div className="d-flex flex-exact my-1">
-                    <p>{result}</p>
-                    <div className="edit transition hidden">
-                        <input type="date" className="input input-info" />
+                <h2>{patName}</h2>
+                <section className="d-grid-exact">
+
+                    <div className="d-flex flex-exact my-1">
+                        <strong className="reason">Patient Age</strong>
+                        <p>{result}</p>
+                        <div className="edit transition hidden">
+                            <input type="date" className="input input-info" />
+                        </div>
                     </div>
-                </div>
+                    <div className="d-flex flex-exact my-1">
+                        <strong className="reason">Patient illness</strong>
+                        <p>{ill}</p>
+                        <div className="edit transition hidden">
+                            <input type="text" className="input input-info" />
+                        </div>
+                    </div>
+                </section>
 
             </section>
         </>
