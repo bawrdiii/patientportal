@@ -59,6 +59,10 @@ a {
     position: absolute;
 }
 
+.transition {
+    transition: visibility .5s ease, opacity .5s linear;
+}
+
 .hidden {
     visibility: hidden;
     opacity: 0;
@@ -621,7 +625,30 @@ input.file-inp {
 }
 
 /* ! */
+/* ? main info */
 .infos img {
     max-width: 150px;
     max-height: 150px;
 }
+
+/* ! */
+
+/* ? exact info */
+.exact-patient {
+    max-width: 550px;
+    margin: 1em auto;
+    --dark-melo: #5555;
+    background: var(--dark-melo);
+    backdrop-filter: blur(10px);
+    padding: 1em;
+    --white: #eee;
+    color: var(--white);
+    text-align: center;
+}
+
+
+.flex-exact {
+    flex-direction: column;
+}
+
+/* ! */

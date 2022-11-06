@@ -7,17 +7,13 @@ import Navbar from "../navbar/navbar"
 
 const ShowPatient = () => {
     const [patName, setPatName] = useState('')
-    const [age, setAge] = useState(0)
+    const [age, setAge] = useState('')
 
     const router = useRouter()
 
-    // const userCollectionRef = collection(db, "Informations")
-
     useEffect(() => {
         if (router.query.patId) {
-
             const getUserData = async () => {
-
                 const docRef = doc(db, "Informations", router.query.patId)
                 const docSanp = await getDoc(docRef)
                 const result = docSanp.data()
@@ -26,25 +22,59 @@ const ShowPatient = () => {
             }
             getUserData()
         }
-        console.log(age);
 
-    })
+    }, [router.isReady])
 
-    const birthHandler = () => {
+    //* Declaring result
+    var result
+
+
+    //* Handling patient age
+    function birthHandler() {
+        var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
         if (age !== 0) {
             const date = new Date()
-            console.log(date.toLocaleDateString())
+            var yy = date.getFullYear();
+            var mm = date.getMonth() + 1;
+            var dd = date.getDate();
+
+            var uyy = Number(age.substring(6))
+            var udd = Number(age.substring(3, 5))
+            var umm = Number(age.substring(0, 2))
+            if (udd > dd) {
+                dd = dd + month[mm - 1]
+                mm = mm - 1
+            }
+            if (umm > mm) {
+                mm = mm + 12
+                yy = yy - 1
+            }
+            var finalYear = yy - uyy
+            var finalMonth = mm - umm
+            var finalDay = dd - udd
+
+            result = `Patient is ${finalYear} years and ${finalMonth} months and ${finalDay} days old`
+
         }
+        return result
     }
     birthHandler()
+
     return (
         <>
             <Navbar />
-            <section>
+            <section className="exact-patient">
                 <h2>
                     {patName}
                 </h2>
-                { }
+                <div className="d-flex flex-exact my-1">
+                    <p>{result}</p>
+                    <div className="edit transition hidden">
+                        <input type="date" className="input input-info" />
+                    </div>
+                </div>
+
             </section>
         </>
 

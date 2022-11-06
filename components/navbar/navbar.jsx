@@ -20,11 +20,11 @@ const Navbar = ({ logOutHandler }) => {
 
         if (light) {
             setLight(false)
-            localStorage.setItem("Theme", "Dark")
+            localStorage.setItem("Theme", "Light")
         }
         else if (!light) {
             setLight(true)
-            localStorage.setItem("Theme", "Light")
+            localStorage.setItem("Theme", "Dark")
         }
 
     }
@@ -61,7 +61,7 @@ const Navbar = ({ logOutHandler }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link href='informations'>
+                    <Link href="/informations">
                         <a className="link">
                             Informations
                         </a>
