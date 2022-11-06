@@ -18,15 +18,12 @@ const Addpatient = () => {
     const [meds, setMeds] = useState([])
     //? Refrences
     const labelNameRef = useRef()
-    const labelAgeRef = useRef()
     const labelIllRef = useRef()
     const labelMsgref = useRef()
     const inpFile = useRef()
     const imgRef = useRef()
     const medLabel = useRef()
     const ulMed = useRef()
-    const nameInpRef = useRef()
-    const ageInpRef = useRef()
 
     var extension, base64String = '';
 
@@ -68,8 +65,6 @@ const Addpatient = () => {
                 base64String = fileReader.result
                     .replace("data:", "")
                     .replace(/^.+,/, "");
-                console.log(base64String);
-
 
                 img.setAttribute("src", e.target.result);
                 img.setAttribute("alt", "Patient pictue");
@@ -151,7 +146,6 @@ const Addpatient = () => {
                         className="input input-info"
                         value={patName}
                         onChange={(e) => onChangeGeneral(e, setPatName, labelNameRef)}
-                        ref={nameInpRef}
                     />
                     <label
                         htmlFor="patient-name"
@@ -161,17 +155,14 @@ const Addpatient = () => {
                 </div>
                 <div className="d-flex flex-form my-1">
                     <input
-                        type="text"
+                        type="date"
                         name="Patient-Age"
                         id="patient-age"
-                        className="input input-info"
-                        placeholder="DD/MM/YY"
+                        className="input input-info input-date"
                         value={patAge}
-                        onChange={e => onChangeGeneral(e, setPatAge, labelAgeRef)}
-                        ref={ageInpRef}
+                        onChange={e => setPatAge(e.target.value)}
                     />
-                    <label htmlFor="patient-age" className="form-label label-info"
-                        ref={labelAgeRef}>
+                    <label htmlFor="patient-age" className="form-label label-info">
                         Year of birth
                     </label>
                 </div>

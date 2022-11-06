@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import Navbar from "../../components/navbar/navbar"
 import { db } from "../../components/firebaseconfig/firebaseconfig"
 import { collection, doc, getDocs } from "firebase/firestore"
-
+import Image from "next/image"
+import Link from "next/link"
 const Infos = () => {
 
     const [users, setUsers] = useState([])
@@ -39,10 +40,17 @@ const Infos = () => {
             <section className="infos">
                 {users.map(item => {
                     return (
-                        <>
-                            <h3 key={item.patientName}>{item.patientName}</h3>
-
-                        </>
+                        <Link href={`/informations/${item.id}`} key={item.id}>
+                            <section>
+                                <h3 key={item.patientName}>{item.patientName}</h3>
+                                <Image
+                                    src={`data:${item.imageType};base64,${item.imageSrc}`}
+                                    key={item.id}
+                                    height="400"
+                                    width="400x"
+                                />
+                            </section>
+                        </Link>
                     )
                 })}
             </section>
