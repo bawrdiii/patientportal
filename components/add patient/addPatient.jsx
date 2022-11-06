@@ -1,13 +1,12 @@
+import { async } from "@firebase/util"
+import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/router"
 import { useEffect, useRef, useState } from "react"
+import { db } from "../firebaseconfig/firebaseconfig"
 
 
 
-const Addpatient = ({ nameInpRef,
-    onSubmit,
-    ageInpRef,
-
-}) => {
+const Addpatient = () => {
 
     //? States
     const [patName, setPatName] = useState('')
@@ -16,7 +15,7 @@ const Addpatient = ({ nameInpRef,
     const [addMsg, setAddMsg] = useState('')
     const [file, setFile] = useState('')
     const [med, setMed] = useState('')
-
+    const [meds, setMeds] = useState([])
     //? Refrences
     const labelNameRef = useRef()
     const labelAgeRef = useRef()
@@ -26,9 +25,14 @@ const Addpatient = ({ nameInpRef,
     const imgRef = useRef()
     const medLabel = useRef()
     const ulMed = useRef()
+    const nameInpRef = useRef()
+    const ageInpRef = useRef()
+
+    var extension, base64String = '';
 
 
-    var extension = '';
+    const userCollectionRef = collection(db, "Informations")
+
     const route = useRouter()
     //* Checking if token is available or not
     useEffect(() => {
@@ -61,7 +65,7 @@ const Addpatient = ({ nameInpRef,
             var fileReader = new FileReader()
             fileReader.onload = function (e) {
 
-                const base64String = fileReader.result
+                base64String = fileReader.result
                     .replace("data:", "")
                     .replace(/^.+,/, "");
                 console.log(base64String);
@@ -79,6 +83,40 @@ const Addpatient = ({ nameInpRef,
 
     }
 
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+        /*
+        *      var reqOpt = {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                      name: patName,
+                      BirthDate: patAge,
+                      Illness: ill,
+                      Medicines: meds.map(item => item),
+                      Message: addMsg,
+                      PatientName: patName,
+                      imageSrc: base64String,
+                      imageType: extension
+                  }),
+                  redirect: "follow"
+              }
+              fetch("https://patient-portal-950da-default-rtdb.europe-west1.firebasedatabase.app/Informations.json", reqOpt)
+                  .then(response => response.json())
+                 * .then(result => console.log(result))
+                  */
+
+        await addDoc(userCollectionRef, {
+            birthDate: patAge,
+            illness: ill,
+            medicines: meds.map(item => item),
+            message: addMsg,
+            patientName: patName,
+            imageSrc: base64String,
+            imageType: extension
+        })
+    }
 
     //TODO    const removePicture = () => {}
 
@@ -88,6 +126,7 @@ const Addpatient = ({ nameInpRef,
         //* Creating ul and adding classes
         const li = document.createElement("li")
         if (med !== "") {
+            meds.push(med)
             li.className = `li-med`
             ulDom.appendChild(li)
             li.textContent = `${med}`
@@ -197,7 +236,7 @@ const Addpatient = ({ nameInpRef,
                 </div>
                 <div className="btn-container">
                     <button className="btn btn-info"
-                        onClick={e => e.preventDefault()}
+                        type="submit"
                     >Save</button>
                 </div>
             </form>
