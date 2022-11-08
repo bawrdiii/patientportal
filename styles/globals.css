@@ -121,6 +121,15 @@ a {
     flex-wrap: wrap;
 }
 
+.nav-res {
+    display: flex;
+    flex-wrap: wrap;
+    padding: .6em;
+    --white: #fffff18c;
+    background-color: var(--white);
+    min-height: 40px;
+}
+
 .navbar>.welcome-message {
     position: inherit;
     width: unset;
@@ -661,3 +670,51 @@ input.file-inp {
 }
 
 /* ! */
+
+/* ? Hamburger Styles */
+.hamburger {
+    position: relative;
+}
+
+.hamburger-container {
+    width: 28px;
+    height: 18px;
+}
+
+.hamburger,
+.hamburger::after,
+.hamburger::before {
+    display: inline-block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--black);
+    transform: rotate(0);
+    transition: width .6s ease, transform .6s ease;
+
+}
+
+.hamburger::after,
+.hamburger::before {
+    content: "";
+    position: absolute;
+}
+
+.hamburger::after {
+    top: -6px;
+}
+
+.hamburger::before {
+    top: -12px;
+}
+
+.ham-after {
+    width: 0;
+}
+
+.ham-after::after {
+    transform: rotate(-45deg) translate(1.5px, -1px);
+}
+
+.ham-after::before {
+    transform: rotate(45deg) translate(3px, 2px);
+}

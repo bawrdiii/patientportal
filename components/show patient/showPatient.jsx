@@ -63,9 +63,20 @@ const ShowPatient = () => {
     }
     birthHandler()
 
+
+    //*Logout user
+    const logOutHandler = () => {
+        const token = localStorage.getItem("Token")
+        if (token) {
+            localStorage.removeItem("Token")
+            router.push("/")
+        }
+        else router.push("/")
+    }
+
     return (
         <>
-            <Navbar />
+            <Navbar logOutHandler={logOutHandler} />
             <section className="exact-patient">
                 <h2>{patName}</h2>
                 <section className="d-grid-exact">

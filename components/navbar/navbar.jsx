@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Hamburger from "../hamburger/hamburger";
 import { Toggle } from "../toggle button/toggle";
 
 
@@ -47,35 +48,41 @@ const Navbar = ({ logOutHandler }) => {
     })
 
     return (
-        <nav className="navbar">
-            <Toggle labelOnclick={labelOnclickHandler} value={light}
-                refLabel={labelRef} refSpan={spanRef}
-            />
-            <h2 className="welcome-message">Welcome admin</h2>
-            <ul className="nav-ul">
-                <li>
-                    <Link href='/'>
-                        <a className="link">
-                            Home
+        <>
+            <nav className="navbar hidden">
+                <Toggle labelOnclick={labelOnclickHandler} value={light}
+                    refLabel={labelRef} refSpan={spanRef}
+                />
+                <h2 className="welcome-message">Welcome admin</h2>
+                <ul className="nav-ul">
+                    <li>
+                        <Link href='/'>
+                            <a className="link">
+                                Home
+                            </a>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/informations">
+                            <a className="link">
+                                Informations
+                            </a>
+                        </Link>
+                    </li>
+                    <li>
+                        <a className="link"
+                            onClick={logOutHandler}
+                        >
+                            Logout
                         </a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/informations">
-                        <a className="link">
-                            Informations
-                        </a>
-                    </Link>
-                </li>
-                <li>
-                    <a className="link"
-                        onClick={logOutHandler}
-                    >
-                        Logout
-                    </a>
-                </li>
-            </ul>
-        </nav >
+                    </li>
+                </ul>
+            </nav>
+            <nav className="nav-res">
+                <Hamburger />
+            </nav>
+        </>
+
     )
 }
 
