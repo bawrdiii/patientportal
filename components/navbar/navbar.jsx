@@ -80,6 +80,10 @@ const Navbar = ({ logOutHandler }) => {
             </nav>
             <nav className="nav-res">
                 <Hamburger />
+                <h3 className="wlc-msg">
+                    welcome
+                    <span> admin</span>
+                </h3>
             </nav>
         </>
 

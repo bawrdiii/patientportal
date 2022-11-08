@@ -124,10 +124,16 @@ a {
 .nav-res {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     padding: .6em;
     --white: #fffff18c;
     background-color: var(--white);
     min-height: 40px;
+}
+
+.nav-res>.wlc-msg {
+    text-transform: uppercase;
 }
 
 .navbar>.welcome-message {

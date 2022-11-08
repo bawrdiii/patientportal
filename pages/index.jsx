@@ -74,14 +74,10 @@ const MainIndex = () => {
     }
     //* Generate token and save to localstorage
     const tokenGenerator = () => {
-        const allCharacter = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCEDFGHIJKLMNOPQRSTUVWXYZ`~-_'
-        var date = new Date()
-        var res = date.getTime().toString(36)
-        for (var i = 0; i <= 10; i++) {
-            var randomNum = Math.floor(Math.random() * allCharacter.length)
-            res += allCharacter.substring(randomNum, randomNum + 1)
-        }
-        return res
+        const date = Date.now().toString(36)
+        const res = Math.random().toString(36).substring(2)
+
+        return res + date
     }
 
 
