@@ -3,10 +3,6 @@
 export const Toggle = ({ labelOnclick, value, refLabel, refSpan }) => {
 
 
-
-
-
-
     return (
         <div className="toggler">
             <label

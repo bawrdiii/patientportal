@@ -16,6 +16,7 @@ const Addpatient = () => {
     const [file, setFile] = useState('')
     const [med, setMed] = useState('')
     const [meds, setMeds] = useState([])
+    const [date, setDate] = useState()
     //? Refrences
     const labelNameRef = useRef()
     const labelIllRef = useRef()
@@ -37,6 +38,15 @@ const Addpatient = () => {
         if (!token) {
             route.push("/")
         }
+        //* Getting today date
+        const date = new Date()
+        let yy = date.getFullYear()
+        let mm = date.getMonth() + 1
+        let dd = date.getDate()
+
+        const res = `${yy}/${mm}/${dd}`
+        setDate(res)
+        console.log(meds)
     })
 
     //? Handling change 
@@ -78,6 +88,11 @@ const Addpatient = () => {
 
     }
 
+    const dateHandler = e => {
+        let val = e.target.value
+        setPatAge(val)
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault()
 
@@ -111,6 +126,13 @@ const Addpatient = () => {
             imageSrc: base64String,
             imageType: extension
         })
+        // let timeOut = setTimeout(() => {
+        //     setAddMsg("")
+        //     setDate("")
+        //     setFile("")
+        //     setIll("")
+
+        // }, 3000);
     }
 
     //TODO    const removePicture = () => {}
@@ -125,11 +147,19 @@ const Addpatient = () => {
             li.className = `li-med`
             ulDom.appendChild(li)
             li.textContent = `${med}`
+            li.setAttribute("id", med)
             setMed('')
             medLabel.current.classList.remove("label-info-active")
         }
         li.addEventListener("click", function (e) {
+            console.log(meds);
+            let id = e.target.id
+            let index = meds.indexOf(id)
+            if (index > -1) {
+                meds.splice(index, 1)
+            }
             e.target.remove()
+
         })
     }
 
@@ -158,12 +188,13 @@ const Addpatient = () => {
                         type="date"
                         name="Patient-Age"
                         id="patient-age"
+                        max={date}
                         className="input input-info input-date"
                         value={patAge}
-                        onChange={e => setPatAge(e.target.value)}
+                        onChange={dateHandler}
                     />
                     <label htmlFor="patient-age" className="form-label label-info">
-                        Year of birth
+                        Date of birth
                     </label>
                 </div>
                 <div className="d-flex flex-form my-1">

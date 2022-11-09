@@ -41,13 +41,14 @@ const Infos = () => {
                 {users.map(item => {
                     return (
                         <Link href={`/informations/${item.id}`} key={item.id}>
-                            <section>
+                            <section className="showpat-container">
                                 <h3 key={item.patientName}>{item.patientName}</h3>
                                 <Image
                                     src={`data:${item.imageType};base64,${item.imageSrc}`}
                                     key={item.id}
-                                    height="400"
-                                    width="400x"
+                                    height="140px"
+                                    width="110px"
+                                    alt={item.patientName}
                                 />
                             </section>
                         </Link>

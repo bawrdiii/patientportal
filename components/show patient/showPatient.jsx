@@ -3,12 +3,15 @@ import { doc, getDoc } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
 import Navbar from "../navbar/navbar"
+import Image from "next/image"
 
 
 const ShowPatient = () => {
     const [patName, setPatName] = useState('')
     const [age, setAge] = useState('')
     const [ill, setIllness] = useState('')
+    const [src, setSrc] = useState('')
+    const [meds, setMeds] = useState([])
 
     const router = useRouter()
 
@@ -18,9 +21,14 @@ const ShowPatient = () => {
                 const docRef = doc(db, "Informations", router.query.patId)
                 const docSanp = await getDoc(docRef)
                 const result = docSanp.data()
+                let imgSrc, imageType
+                imgSrc = result.imageSrc;
+                imageType = result.imageType
+                setSrc(`data:${imageType};base64,${imgSrc}`)
                 setPatName(result.patientName)
                 setAge(result.birthDate)
                 setIllness(result.illness)
+                setMeds(result.medicines)
             }
             getUserData()
         }
@@ -41,9 +49,10 @@ const ShowPatient = () => {
             var mm = date.getMonth() + 1;
             var dd = date.getDate();
 
-            var uyy = Number(age.substring(6))
-            var udd = Number(age.substring(3, 5))
-            var umm = Number(age.substring(0, 2))
+            var uyy = Number(age.substring(0, 4))
+            var udd = Number(age.substring(8))
+            var umm = Number(age.substring(5, 7))
+
             if (udd > dd) {
                 dd = dd + month[mm - 1]
                 mm = mm - 1
@@ -78,7 +87,10 @@ const ShowPatient = () => {
         <>
             <Navbar logOutHandler={logOutHandler} />
             <section className="exact-patient">
-                <h2>{patName}</h2>
+                {src !== "" ? <Image src={src} height="110px" width="85px" alt={patName} />
+                    : <p>There is no picture </p>
+                }
+                <h2><span className="name">Name: </span>{patName}</h2>
                 <section className="d-grid-exact">
 
                     <div className="d-flex flex-exact my-1">
@@ -88,6 +100,7 @@ const ShowPatient = () => {
                             <input type="date" className="input input-info" />
                         </div>
                     </div>
+
                     <div className="d-flex flex-exact my-1">
                         <strong className="reason">Patient illness</strong>
                         <p>{ill}</p>
@@ -95,6 +108,20 @@ const ShowPatient = () => {
                             <input type="text" className="input input-info" />
                         </div>
                     </div>
+
+                    {meds.length !== 0 ?
+
+                        <div className="d-flex flex-exact my-1">
+                            <strong className="reason">Patient medicines</strong>
+                            <p>{
+                                meds.map(item => <p>{item}</p>)
+                            }</p>
+                            <div className="edit transition hidden">
+                                <input type="text" className="input input-info" />
+                            </div>
+                        </div>
+                        : <strong className="reason">There are no medicines</strong>}
+
                 </section>
 
             </section>

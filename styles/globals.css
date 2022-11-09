@@ -33,6 +33,27 @@ body {
     background-repeat: no-repeat;
 }
 
+/* * Body modal open styles */
+body.overflow-hidden {
+    overflow: hidden;
+}
+
+body.overflow-hidden .patient-container {
+    z-index: -1;
+}
+
+body.overflow-hidden .container-infos {
+    position: relative;
+    z-index: -1;
+}
+
+body.overflow-hidden .exact-patient {
+    position: relative;
+    z-index: -1;
+}
+
+
+/* ! */
 #__next {
     height: 100%;
 }
@@ -107,6 +128,54 @@ a {
 }
 
 /* ! */
+/* ? Modal and backdrop styles  */
+.modal {
+    position: fixed;
+    z-index: 300;
+    background: #ffff;
+    width: 25%;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 16px;
+    height: 100%;
+    box-sizing: border-box;
+    transition: transform .5s ease, opacity .3s ease;
+
+}
+
+.backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .5);
+}
+
+.modal>.nav-ul {
+    margin-top: 1em;
+    flex-direction: column;
+}
+
+.wlc-msg {
+    text-transform: uppercase;
+    margin: 1.5em 0;
+    text-align: center;
+}
+
+@media (max-width:48rem) {
+    .modal {
+        width: 40%;
+    }
+}
+
+@media (max-width:20rem) {
+    .modal {
+        width: 45%;
+    }
+}
+
+/* ! */
 /* ? Navbar styles */
 .navbar {
     padding: 0 .8em;
@@ -130,11 +199,9 @@ a {
     --white: #fffff18c;
     background-color: var(--white);
     min-height: 40px;
+    display: none;
 }
 
-.nav-res>.wlc-msg {
-    text-transform: uppercase;
-}
 
 .navbar>.welcome-message {
     position: inherit;
@@ -634,20 +701,25 @@ input.file-inp {
     width: 30px;
 }
 
-.input-date+label.label-info,
-.input-date:focus+label.label-info {
-    transform: translate(50px, 0) !important;
+.input-date+label.label-info {
+    transform: translate(60px, 0);
 }
 
 /* ! */
 /* ? main info */
-.infos img {
-    max-width: 150px;
-    max-height: 150px;
+
+/* ! */
+/* ? show patient */
+.infos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
+    margin: 1em 0;
+    
 }
 
 /* ! */
-
 /* ? exact info */
 .exact-patient {
     max-width: 850px;
@@ -675,11 +747,21 @@ input.file-inp {
     flex-direction: column;
 }
 
+.exact-patient img {
+    max-width: 85px;
+    max-height: 115px;
+}
+
+.name {
+    color: var(--black);
+}
+
 /* ! */
 
 /* ? Hamburger Styles */
 .hamburger {
     position: relative;
+    z-index: 301;
 }
 
 .hamburger-container {
@@ -723,4 +805,21 @@ input.file-inp {
 
 .ham-after::before {
     transform: rotate(45deg) translate(3px, 2px);
+}
+
+
+
+
+
+
+
+/* ? Making site responsive */
+@media screen and (max-width:768px) {
+    .nav-res {
+        display: flex;
+    }
+
+    .navbar {
+        display: none;
+    }
 }

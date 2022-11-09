@@ -2,15 +2,18 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Hamburger from "../hamburger/hamburger";
 import { Toggle } from "../toggle button/toggle";
+import Modal from "../UI/modal/modal";
 
 
 const Navbar = ({ logOutHandler }) => {
 
     const [light, setLight] = useState(true)
+    const [show, setShow] = useState(false)
 
     const labelRef = useRef()
     const spanRef = useRef()
 
+    //* Handling onclick 
     const labelOnclickHandler = e => {
         e.preventDefault()
         const labelDom = labelRef.current;
@@ -29,6 +32,8 @@ const Navbar = ({ logOutHandler }) => {
         }
 
     }
+
+
     useEffect(() => {
         const labelDom = labelRef.current;
         const spanDom = spanRef.current;
@@ -47,9 +52,41 @@ const Navbar = ({ logOutHandler }) => {
 
     })
 
+    //* closing Modal
+    const modalCloseHandler = () => {
+        setShow(false)
+        document.body.removeAttribute("class")
+        const pDom = pElement.current
+
+        pDom.classList.remove("ham-after")
+
+    }
+
+    //* Hamburger handler & making show true 
+    const pElement = useRef()
+
+    const hamHandler = () => {
+        const pDom = pElement.current
+
+        if (pDom.classList.contains("ham-after")) {
+            pDom.classList.remove("ham-after")
+        } else {
+            pDom.classList.add("ham-after")
+        }
+        if (show) {
+            setShow(false)
+            document.body.removeAttribute("class")
+        }
+        else {
+            setShow(true)
+            document.body.classList.add("overflow-hidden")
+        }
+    }
+
     return (
         <>
-            <nav className="navbar hidden">
+            <Modal modalClose={modalCloseHandler} show={show} />
+            <nav className="navbar">
                 <Toggle labelOnclick={labelOnclickHandler} value={light}
                     refLabel={labelRef} refSpan={spanRef}
                 />
@@ -79,11 +116,13 @@ const Navbar = ({ logOutHandler }) => {
                 </ul>
             </nav>
             <nav className="nav-res">
-                <Hamburger />
-                <h3 className="wlc-msg">
-                    welcome
-                    <span> admin</span>
-                </h3>
+                <Hamburger pElement={pElement} hamHandler={hamHandler} />
+                <Toggle
+                    labelOnclick={labelOnclickHandler}
+                    value={light}
+                    refLabel={labelRef}
+                    refSpan={spanRef}
+                />
             </nav>
         </>
 
