@@ -1,0 +1,129 @@
+/* ? Making site responsive */
+@media screen and (max-width:768px) {
+
+    .nav-res {
+        display: flex;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .tooltip {
+        display: none;
+    }
+
+    input.input {
+        height: 34px;
+    }
+
+    .input+.form-label {
+        transform: translate(70px, 27px);
+    }
+
+    .input:focus+.form-label,
+    .label-active {
+        transform: translate(65px, 0);
+    }
+
+    .input-date+label.label-info {
+        transform: translate(70px, 0);
+    }
+
+    .nav-ul>li {
+        margin: .3em 0;
+    }
+
+    .btn {
+        animation: colorActive 5s infinite alternate ease;
+    }
+
+    .btn::before {
+        animation: beforeActive 5s infinite alternate ease;
+    }
+
+
+    /* ? Define button animation */
+    @keyframes colorActive {
+        from {
+            color: #111;
+        }
+
+        to {
+            color: var(--white);
+        }
+    }
+
+    @keyframes colorAddButton {
+        from {
+            --dark-melo: rgba(68, 68, 68, 0.735);
+            color: var(--dark-melo);
+
+        }
+
+        to {
+            color: var(--black);
+        }
+    }
+
+    @keyframes beforeActive {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 150%;
+        }
+    }
+
+    /* ! */
+
+    .container {
+        display: block;
+        margin-top: 7em;
+    }
+
+    .welcome {
+        animation: unset;
+    }
+
+    .container-infos {
+        max-width: 90%;
+    }
+}
+
+@media (max-width:426px) {
+
+    .input:focus+.form-label,
+    .label-active {
+        transform: translate(35px, 0);
+    }
+
+    .input-date+label.label-info {
+        transform: translate(40px, 0);
+    }
+
+    .input-date:focus+label.label-info {
+        transform: translate(35px, 0);
+    }
+}
+
+@media (min-width:427px) and (max-width:767px) {
+
+    .input-date+label.label-info,
+    .input-date:focus+label.label-info {
+        transform: translate(38px, 0);
+    }
+
+    .input+.form-label {
+        transform: translate(45px, 27px);
+    }
+
+    .input:focus+.form-label,
+    .label-active {
+        transform: translate(34px, 0);
+    }
+
+}
+
+/* ! */

@@ -24,9 +24,11 @@ const Navbar = ({ logOutHandler }) => {
 
         if (light) {
             setLight(false)
+            document.body.classList.remove("dark")
             localStorage.setItem("Theme", "Light")
         }
         else if (!light) {
+            document.body.classList.add("dark")
             setLight(true)
             localStorage.setItem("Theme", "Dark")
         }

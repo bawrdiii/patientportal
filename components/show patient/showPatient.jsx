@@ -13,6 +13,7 @@ const ShowPatient = () => {
     const [src, setSrc] = useState('')
     const [meds, setMeds] = useState([])
     const [msg, setMsg] = useState('')
+    const [edit, setEdit] = useState(false)
 
     const router = useRouter()
 
@@ -75,6 +76,16 @@ const ShowPatient = () => {
     birthHandler()
 
 
+    //* Show edit field 
+    const showEditHandler = e => {
+        const parent = e.target.parentElement
+        let bool = parent.classList.contains('editTrue')
+        if (!bool) {
+            parent.classList.add("editTrue")
+        }
+        else parent.classList.remove("editTrue")
+    }
+
     //*Logout user
     const logOutHandler = () => {
         const token = localStorage.getItem("Token")
@@ -99,11 +110,12 @@ const ShowPatient = () => {
                         age !== "" ? (
                             <div className="d-flex flex-exact my-1">
                                 <strong className="reason">Patient Age
-                                    <span className="edit-doc"></span>
+                                    <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                                 <p>{result}</p>
-                                <div className="edit transition hidden">
+                                <div className="edit transition">
                                     <input type="date" className="input input-info" />
+                                    <button className="btn edit-btn">save</button>
                                 </div>
                             </div>
                         ) : <strong className="reason">َAge isn't entered</strong>
@@ -112,10 +124,14 @@ const ShowPatient = () => {
                     {ill !== "" ? (
 
                         <div className="d-flex flex-exact my-1">
-                            <strong className="reason">Patient illness</strong>
+                            <strong className="reason">Patient illness
+                                <span className="edit-doc" onClick={showEditHandler}></span>
+                            </strong>
                             <p>{ill}</p>
-                            <div className="edit transition hidden">
-                                <input type="text" className="input input-info" />
+                            <div className="edit transition">
+                                <input type="text" className="input input-info" placeholder="New illness or remove illness" />
+                                <button className="btn edit-btn">save</button>
+
                             </div>
                         </div>
                     ) : <strong className="reason">Ill isn't entered</strong>
@@ -124,22 +140,31 @@ const ShowPatient = () => {
                     {meds.length !== 0 ?
 
                         <div className="d-flex flex-exact my-1">
-                            <strong className="reason">Patient medicines</strong>
-                            <p>{
-                                meds.map(item => <span key={item} className="span-med">{item}</span>)
-                            }</p>
-                            <div className="edit transition hidden">
-                                <input type="text" className="input input-info" />
+                            <strong className="reason">Patient medicines
+                                <span className="edit-doc" onClick={showEditHandler}></span>
+                            </strong>
+                            <ul className="ul-med">{
+                                meds.map(item => <li className="li-med">{item}</li>
+                                )
+                            }</ul>
+                            <div className="edit transition">
+                                <input type="text" className="input input-info" placeholder="Add new medicine" />
+                                <button className="btn edit-btn">save</button>
+
                             </div>
                         </div>
                         : <strong className="reason">There are no medicines</strong>}
 
                     {msg !== "" ? (
                         <div className="d-flex flex-exact my-1">
-                            <strong className="reason">Additional message</strong>
+                            <strong className="reason">Additional message
+                                <span className="edit-doc" onClick={showEditHandler}></span>
+                            </strong>
                             <p>{msg}</p>
-                            <div className="edit transition hidden">
-                                <input type="text" className="input input-info" />
+                            <div className="edit transition">
+                                <input type="text" className="input input-info" placeholder="Add message" />
+                                <button className="btn edit-btn">save</button>
+
                             </div>
                         </div>
                     ) : <strong className="reason">There ist any additional message</strong>}

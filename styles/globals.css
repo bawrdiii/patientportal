@@ -116,7 +116,7 @@ a {
 }
 
 .welcome {
-    animation: fsize 1s ease infinite alternate;
+    animation: fsize 2s ease infinite alternate;
 }
 
 /* * Define animation */
@@ -194,7 +194,6 @@ a {
 }
 
 .nav-res {
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -264,10 +263,14 @@ a {
     transition: background .5s linear
 }
 
+.toggler {
+    text-align: left;
+}
 
 .switch {
     appearance: none;
     -webkit-appearance: none;
+    width: 0;
 }
 
 .toggle-span {
@@ -452,7 +455,6 @@ a {
 
 .btn:hover {
     color: var(--white);
-    border-style: solid;
 }
 
 .btn:hover::before {
@@ -479,7 +481,6 @@ a {
     background-color: var(--melo-blue);
     color: var(--white);
     text-align: center;
-
     visibility: hidden;
     opacity: 0;
 
@@ -782,6 +783,23 @@ input.file-inp {
     text-align: center;
 }
 
+.edit {
+    visibility: hidden;
+    opacity: 0;
+    padding: .5em 0;
+}
+
+.edit>.input-info::placeholder,
+.edit>.input-info {
+    opacity: 1;
+    visibility: visible;
+}
+
+.edit>.input-info::placeholder,
+.edit>.input-info {
+    color: var(--black);
+}
+
 .reason {
     color: var(--black);
     font-size: 1.1em;
@@ -795,6 +813,10 @@ input.file-inp {
 
 .flex-exact {
     flex-direction: column;
+}
+
+.flex-exact>.ul-med {
+    margin-top: .5em;
 }
 
 .exact-patient img {
@@ -826,6 +848,17 @@ input.file-inp {
     right: 30px;
     cursor: pointer;
     bottom: 0;
+}
+
+.editTrue~.edit {
+    visibility: visible;
+    opacity: 1;
+}
+
+.edit-btn {
+    display: block;
+    width: 4em;
+    margin: .5em auto 0 auto;
 }
 
 /* ! */
@@ -877,21 +910,4 @@ input.file-inp {
 
 .ham-after::before {
     transform: rotate(45deg) translate(3px, 2px);
-}
-
-
-
-
-
-
-
-/* ? Making site responsive */
-@media screen and (max-width:768px) {
-    .nav-res {
-        display: flex;
-    }
-
-    .navbar {
-        display: none;
-    }
 }

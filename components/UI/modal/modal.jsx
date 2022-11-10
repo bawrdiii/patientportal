@@ -1,4 +1,3 @@
-import { Toggle } from "../../toggle button/toggle";
 import Backdrop from "../backdrop/backdrop";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,16 +6,23 @@ const Modal = ({ show, modalClose }) => {
     const router = useRouter()
 
     const logOutHandler = () => {
-
         const token = localStorage.getItem("Token")
 
         if (token) {
-            localStorage.removeItem(token)
+            localStorage.removeItem("Token")
             router.push("/")
         }
-        else router.push("/")
+        if (token && router.asPath === "/") {
+            localStorage.removeItem("Token")
+            document.location.reload()
+        }
+
     }
 
+
+    const handleOverflow = () => {
+        document.body.classList.remove("overflow-hidden")
+    }
     return (
         <>
             <Backdrop click={modalClose} show={show} />
@@ -33,14 +39,14 @@ const Modal = ({ show, modalClose }) => {
                 <ul className="nav-ul">
                     <li>
                         <Link href="/">
-                            <a className="link">
+                            <a className="link" onClick={handleOverflow}>
                                 Home
                             </a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/informations">
-                            <a className="link">
+                            <a className="link" onClick={handleOverflow}>
                                 Informations
                             </a>
                         </Link>
