@@ -46,7 +46,6 @@ const Addpatient = () => {
 
         const res = `${yy}/${mm}/${dd}`
         setDate(res)
-        console.log(meds)
     })
 
     //? Handling change 
@@ -124,7 +123,7 @@ const Addpatient = () => {
             message: addMsg,
             patientName: patName,
             imageSrc: base64String,
-            imageType: extension
+            imageType: extension,
         })
         // let timeOut = setTimeout(() => {
         //     setAddMsg("")

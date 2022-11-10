@@ -12,6 +12,7 @@ const ShowPatient = () => {
     const [ill, setIllness] = useState('')
     const [src, setSrc] = useState('')
     const [meds, setMeds] = useState([])
+    const [msg, setMsg] = useState('')
 
     const router = useRouter()
 
@@ -29,6 +30,7 @@ const ShowPatient = () => {
                 setAge(result.birthDate)
                 setIllness(result.illness)
                 setMeds(result.medicines)
+                setMsg(result.message)
             }
             getUserData()
         }
@@ -93,28 +95,38 @@ const ShowPatient = () => {
                 <h2><span className="name">Name: </span>{patName}</h2>
                 <section className="d-grid-exact">
 
-                    <div className="d-flex flex-exact my-1">
-                        <strong className="reason">Patient Age</strong>
-                        <p>{result}</p>
-                        <div className="edit transition hidden">
-                            <input type="date" className="input input-info" />
-                        </div>
-                    </div>
+                    {
+                        age !== "" ? (
+                            <div className="d-flex flex-exact my-1">
+                                <strong className="reason">Patient Age
+                                    <span className="edit-doc"></span>
+                                </strong>
+                                <p>{result}</p>
+                                <div className="edit transition hidden">
+                                    <input type="date" className="input input-info" />
+                                </div>
+                            </div>
+                        ) : <strong className="reason">َAge isn't entered</strong>
+                    }
 
-                    <div className="d-flex flex-exact my-1">
-                        <strong className="reason">Patient illness</strong>
-                        <p>{ill}</p>
-                        <div className="edit transition hidden">
-                            <input type="text" className="input input-info" />
+                    {ill !== "" ? (
+
+                        <div className="d-flex flex-exact my-1">
+                            <strong className="reason">Patient illness</strong>
+                            <p>{ill}</p>
+                            <div className="edit transition hidden">
+                                <input type="text" className="input input-info" />
+                            </div>
                         </div>
-                    </div>
+                    ) : <strong className="reason">Ill isn't entered</strong>
+                    }
 
                     {meds.length !== 0 ?
 
                         <div className="d-flex flex-exact my-1">
                             <strong className="reason">Patient medicines</strong>
                             <p>{
-                                meds.map(item => <p>{item}</p>)
+                                meds.map(item => <span key={item} className="span-med">{item}</span>)
                             }</p>
                             <div className="edit transition hidden">
                                 <input type="text" className="input input-info" />
@@ -122,6 +134,15 @@ const ShowPatient = () => {
                         </div>
                         : <strong className="reason">There are no medicines</strong>}
 
+                    {msg !== "" ? (
+                        <div className="d-flex flex-exact my-1">
+                            <strong className="reason">Additional message</strong>
+                            <p>{msg}</p>
+                            <div className="edit transition hidden">
+                                <input type="text" className="input input-info" />
+                            </div>
+                        </div>
+                    ) : <strong className="reason">There ist any additional message</strong>}
                 </section>
 
             </section>
