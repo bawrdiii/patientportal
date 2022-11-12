@@ -1,5 +1,7 @@
 /* ? Making site responsive */
-@media screen and (max-width:768px) {
+@import "./globals.css";
+
+@media (max-width:768px) {
 
     .nav-res {
         display: flex;
@@ -42,6 +44,89 @@
         animation: beforeActive 5s infinite alternate ease;
     }
 
+    .container {
+        display: block;
+        margin-top: 7em;
+    }
+
+    .welcome {
+        animation: unset;
+    }
+
+    .container-infos {
+        max-width: 90%;
+        margin: 1em auto;
+    }
+
+    .btn-container {
+        margin: 0;
+    }
+
+    .form-patient-info>.my-1 {
+        margin: 0 !important;
+    }
+
+    .patient-container::before {
+        all: unset;
+    }
+
+    .patient-container {
+        --white: #fff;
+        background-color: var(--white);
+    }
+
+    .add-button {
+        color: var(--black);
+    }
+
+    .file-label::before {
+        animation: beforeActive 2s 4s forwards linear;
+    }
+
+
+
+    .infos {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 1em;
+
+    }
+
+    .showpat-container {
+        width: 75%;
+        animation: boxShadow 3s 3s forwards ease;
+    }
+
+    .showpat-container::before {
+        animation: beforeActive2 3s 3s forwards linear;
+    }
+
+    .showpat-container>h3 {
+        margin-top: unset;
+        font-size: 1.1em;
+    }
+
+    .d-grid-exact {
+        grid-template-columns: 1fr;
+    }
+
+    .flex-exact {
+        height: unset;
+    }
+
+    .d-block~.edit {
+        display: unset;
+    }
+
+    .editTrue~.edit {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .exact-patient {
+        max-width: 90%;
+        padding: .3em;
+    }
 
     /* ? Define button animation */
     @keyframes colorActive {
@@ -76,36 +161,43 @@
         }
     }
 
+    @keyframes beforeActive2 {
+        from {
+            width: 0;
+        }
+
+        to {
+            left: -65px;
+            width: 220%;
+        }
+    }
+
+    @keyframes boxShadow {
+        to {
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .6);
+        }
+    }
+
     /* ! */
 
-    .container {
-        display: block;
-        margin-top: 7em;
-    }
-
-    .welcome {
-        animation: unset;
-    }
-
-    .container-infos {
-        max-width: 90%;
-    }
 }
 
 @media (max-width:426px) {
 
+    .input+.form-label {
+        transform: translate(30px, 20px);
+    }
+
     .input:focus+.form-label,
-    .label-active {
-        transform: translate(35px, 0);
+    .label-active,
+    .input-date:focus+label.label-info {
+        transform: translate(27px, 0) !important;
     }
 
     .input-date+label.label-info {
-        transform: translate(40px, 0);
+        transform: translate(30px, 0) !important;
     }
 
-    .input-date:focus+label.label-info {
-        transform: translate(35px, 0);
-    }
 }
 
 @media (min-width:427px) and (max-width:767px) {

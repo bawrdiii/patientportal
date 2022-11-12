@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { doc, getDoc } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
 import Navbar from "../navbar/navbar"
 import Image from "next/image"
@@ -81,9 +81,17 @@ const ShowPatient = () => {
         const parent = e.target.parentElement
         let bool = parent.classList.contains('editTrue')
         if (!bool) {
-            parent.classList.add("editTrue")
+            parent.classList.add("d-block")
+            setTimeout(() => {
+                parent.classList.add("editTrue")
+            }, 1000);
         }
-        else parent.classList.remove("editTrue")
+        else {
+            parent.classList.remove("editTrue")
+            setTimeout(() => {
+                parent.classList.remove("d-block")
+            }, 1000);
+        }
     }
 
     //*Logout user
@@ -144,7 +152,7 @@ const ShowPatient = () => {
                                 <span className="edit-doc" onClick={showEditHandler}></span>
                             </strong>
                             <ul className="ul-med">{
-                                meds.map(item => <li className="li-med">{item}</li>
+                                meds.map(item => <li className="li-med" key={item}>{item}</li>
                                 )
                             }</ul>
                             <div className="edit transition">

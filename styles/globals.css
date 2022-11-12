@@ -102,6 +102,9 @@ a {
     display: flex;
 }
 
+.d-none {
+    display: none;
+}
 
 /* ! */
 /* ? Heading styles */
@@ -783,10 +786,16 @@ input.file-inp {
     text-align: center;
 }
 
+
+.d-block~.edit {
+    display: block;
+}
+
 .edit {
     visibility: hidden;
     opacity: 0;
     padding: .5em 0;
+    display: none
 }
 
 .edit>.input-info::placeholder,
@@ -813,6 +822,7 @@ input.file-inp {
 
 .flex-exact {
     flex-direction: column;
+    height: 110px;
 }
 
 .flex-exact>.ul-med {

@@ -34,6 +34,7 @@ const Addpatient = () => {
     const route = useRouter()
     //* Checking if token is available or not
     useEffect(() => {
+        console.log(route);
         const token = localStorage.getItem("Token")
         if (!token) {
             route.push("/")
@@ -95,43 +96,31 @@ const Addpatient = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        /*
-        *      var reqOpt = {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                      name: patName,
-                      BirthDate: patAge,
-                      Illness: ill,
-                      Medicines: meds.map(item => item),
-                      Message: addMsg,
-                      PatientName: patName,
-                      imageSrc: base64String,
-                      imageType: extension
-                  }),
-                  redirect: "follow"
-              }
-              fetch("https://patient-portal-950da-default-rtdb.europe-west1.firebasedatabase.app/Informations.json", reqOpt)
-                  .then(response => response.json())
-                 * .then(result => console.log(result))
-                  */
+        if (base64String !== "" || undefined &&
+            extension !== "" || undefined
+        ) {
+            await addDoc(userCollectionRef, {
+                birthDate: patAge,
+                illness: ill,
+                medicines: meds.map(item => item),
+                message: addMsg,
+                patientName: patName,
+                imageSrc: base64String,
+                imageType: extension,
+            })
+        }
+        else {
+            await addDoc(userCollectionRef, {
+                birthDate: patAge,
+                illness: ill,
+                medicines: meds.map(item => item),
+                message: addMsg,
+                patientName: patName,
+                imageSrc: "",
+                imageType: "",
+            })
+        }
 
-        await addDoc(userCollectionRef, {
-            birthDate: patAge,
-            illness: ill,
-            medicines: meds.map(item => item),
-            message: addMsg,
-            patientName: patName,
-            imageSrc: base64String,
-            imageType: extension,
-        })
-        // let timeOut = setTimeout(() => {
-        //     setAddMsg("")
-        //     setDate("")
-        //     setFile("")
-        //     setIll("")
-
-        // }, 3000);
     }
 
     //TODO    const removePicture = () => {}
@@ -233,6 +222,7 @@ const Addpatient = () => {
                         value={addMsg}
                         onChange={e => onChangeGeneral(e, setAddMsg, labelMsgref)}
                         spellCheck
+                        placeholder="Add necessary messages"
                     ></textarea>
                     <label
                         htmlFor="additional"
