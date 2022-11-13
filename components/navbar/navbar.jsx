@@ -7,7 +7,7 @@ import Modal from "../UI/modal/modal";
 
 const Navbar = ({ logOutHandler }) => {
 
-    const [light, setLight] = useState(true)
+    const [dark, setDark] = useState(false)
     const [show, setShow] = useState(false)
 
     const labelRef = useRef()
@@ -16,23 +16,20 @@ const Navbar = ({ logOutHandler }) => {
     //* Handling onclick 
     const labelOnclickHandler = e => {
         e.preventDefault()
-        const labelDom = labelRef.current;
-        const spanDom = spanRef.current;
-
-        labelDom.classList.toggle("toggle-label-after")
+        const spanDom = spanRef.current
+        const labelDom = labelRef.current
         spanDom.classList.toggle("toggle-span-after")
+        labelDom.classList.toggle("toggle-label-after")
 
-        if (light) {
-            setLight(false)
-            document.body.classList.remove("dark")
+        if (dark) {
+            setDark(false)
             localStorage.setItem("Theme", "Light")
         }
-        else if (!light) {
-            document.body.classList.add("dark")
-            setLight(true)
+        else if (!dark) {
+            setDark(true)
             localStorage.setItem("Theme", "Dark")
         }
-
+        document.body.classList.toggle("dark")
     }
 
 
@@ -43,13 +40,16 @@ const Navbar = ({ logOutHandler }) => {
         var theme = localStorage.getItem("Theme")
 
         if (theme === "Light") {
+            setDark(false)
             spanDom.classList.remove("toggle-label-after")
             labelDom.classList.remove("toggle-span-after")
+            document.body.classList.remove("dark")
         }
         else if (theme === "Dark") {
+            setDark(true)
             spanDom.classList.add("toggle-span-after")
             labelDom.classList.add("toggle-label-after")
-
+            document.body.classList.add("dark")
         }
 
     })
@@ -57,7 +57,7 @@ const Navbar = ({ logOutHandler }) => {
     //* closing Modal
     const modalCloseHandler = () => {
         setShow(false)
-        document.body.removeAttribute("class")
+        document.body.classList.remove("overflow-hidden")
         const pDom = pElement.current
 
         pDom.classList.remove("ham-after")
@@ -77,7 +77,7 @@ const Navbar = ({ logOutHandler }) => {
         }
         if (show) {
             setShow(false)
-            document.body.removeAttribute("class")
+            document.body.classList.remove("overflow-hidden")
         }
         else {
             setShow(true)
@@ -88,14 +88,18 @@ const Navbar = ({ logOutHandler }) => {
     return (
         <>
             <Modal modalClose={modalCloseHandler} show={show} />
-            <nav className="navbar">
-                <Toggle labelOnclick={labelOnclickHandler} value={light}
-                    refLabel={labelRef} refSpan={spanRef}
+            <nav className="navbar nav-res">
+                <Toggle
+                    labelOnclick={labelOnclickHandler}
+                    value={dark}
+                    refLabel={labelRef}
+                    refSpan={spanRef}
                 />
+                <Hamburger pElement={pElement} hamHandler={hamHandler} />
                 <h2 className="welcome-message">Welcome admin</h2>
                 <ul className="nav-ul">
                     <li>
-                        <Link href='/'>
+                        <Link href="/">
                             <a className="link">
                                 Home
                             </a>
@@ -116,15 +120,6 @@ const Navbar = ({ logOutHandler }) => {
                         </a>
                     </li>
                 </ul>
-            </nav>
-            <nav className="nav-res">
-                <Hamburger pElement={pElement} hamHandler={hamHandler} />
-                <Toggle
-                    labelOnclick={labelOnclickHandler}
-                    value={light}
-                    refLabel={labelRef}
-                    refSpan={spanRef}
-                />
             </nav>
         </>
 

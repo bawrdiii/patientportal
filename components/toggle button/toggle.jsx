@@ -7,10 +7,10 @@ export const Toggle = ({ labelOnclick, value, refLabel, refSpan }) => {
         <div className="toggler">
             <label
                 htmlFor="toggle"
-                id="toggle-label"
                 className="toggle-label"
                 ref={refLabel}
-                onClick={labelOnclick}>
+                onClick={labelOnclick}
+            >
                 <input type="checkbox"
                     name="switch"
                     id="toggle"

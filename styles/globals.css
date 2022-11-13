@@ -196,17 +196,9 @@ a {
     flex-wrap: wrap;
 }
 
-.nav-res {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: .6em;
-    --white: #fffff18c;
-    background-color: var(--white);
-    min-height: 40px;
+.navbar>.hamburger-container {
     display: none;
 }
-
 
 .navbar>.welcome-message {
     position: inherit;
@@ -264,10 +256,6 @@ a {
     height: 25px;
     cursor: pointer;
     transition: background .5s linear
-}
-
-.toggler {
-    text-align: left;
 }
 
 .switch {
@@ -579,7 +567,7 @@ a {
     padding: .4em;
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
-
+    border-radius: 15px;
 }
 
 .form-info {
@@ -784,6 +772,7 @@ input.file-inp {
     --white: #eee;
     color: var(--white);
     text-align: center;
+    border-radius: 15px;
 }
 
 

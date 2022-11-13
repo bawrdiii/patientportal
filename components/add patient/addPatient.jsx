@@ -3,12 +3,13 @@ import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/router"
 import { useEffect, useRef, useState } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
-
+import { BarLoader } from "react-spinner-animated"
 
 
 const Addpatient = () => {
 
     //? States
+    const [loading, setLoading] = useState(false)
     const [patName, setPatName] = useState('')
     const [patAge, setPatAge] = useState('')
     const [ill, setIll] = useState('')
@@ -34,7 +35,6 @@ const Addpatient = () => {
     const route = useRouter()
     //* Checking if token is available or not
     useEffect(() => {
-        console.log(route);
         const token = localStorage.getItem("Token")
         if (!token) {
             route.push("/")
@@ -95,10 +95,16 @@ const Addpatient = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
-        if (base64String !== "" || undefined &&
-            extension !== "" || undefined
+        if (patName === "" && patAge === "" && ill === "" && addMsg === "") {
+            setLoading(false)
+            return <p> Salam </p>
+        }
+        if (base64String !== "" || undefined && extension !== "" || undefined &&
+            patName !== "" &&
+            patAge !== "" &&
+            ill !== ""
         ) {
+            setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
                 illness: ill,
@@ -109,7 +115,10 @@ const Addpatient = () => {
                 imageType: extension,
             })
         }
-        else {
+        else if (base64String === "" || base64String == undefined
+            && extension !== "" || extension == undefined &&
+            patName !== "" && patAge !== "" && ill !== "") {
+            setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
                 illness: ill,
@@ -120,6 +129,10 @@ const Addpatient = () => {
                 imageType: "",
             })
         }
+
+        setTimeout(() => {
+            document.location.reload()
+        }, 1000);
 
     }
 
@@ -153,105 +166,110 @@ const Addpatient = () => {
 
 
     return (
-        <section className="container-infos">
-            <form className="form-patient-info" method="post" onSubmit={onSubmit}>
-                <div className="d-flex flex-form my-1">
-                    <input
-                        type="text"
-                        placeholder="John Doe"
-                        id="patient-name"
-                        name="patientName"
-                        className="input input-info"
-                        value={patName}
-                        onChange={(e) => onChangeGeneral(e, setPatName, labelNameRef)}
-                    />
-                    <label
-                        htmlFor="patient-name"
-                        className="form-label label-info"
-                        ref={labelNameRef}
-                    >Patient Name</label>
-                </div>
-                <div className="d-flex flex-form my-1">
-                    <input
-                        type="date"
-                        name="Patient-Age"
-                        id="patient-age"
-                        max={date}
-                        className="input input-info input-date"
-                        value={patAge}
-                        onChange={dateHandler}
-                    />
-                    <label htmlFor="patient-age" className="form-label label-info">
-                        Date of birth
-                    </label>
-                </div>
-                <div className="d-flex flex-form my-1">
-                    <input
-                        type="text"
-                        name="illness"
-                        id="illness"
-                        className="input input-info"
-                        placeholder="Headache"
-                        value={ill}
-                        onChange={e => onChangeGeneral(e, setIll, labelIllRef)}
-                    />
-                    <label htmlFor="illness" className="form-label label-info"
-                        ref={labelIllRef}
-                    >Illness</label>
-                </div>
-                <div className="d-flex flex-form my-1 p-relative">
-                    <input
-                        type="text"
-                        name="medicine"
-                        id="medicine"
-                        className="input input-info"
-                        placeholder="Medicine"
-                        value={med}
-                        onChange={e => onChangeGeneral(e, setMed, medLabel)}
-                    />
-                    <label htmlFor="medicine" ref={medLabel} className="form-label label-info"
-                    >Medicine</label>
-                    <button className="btn-add p-absolute" type="button" onClick={addMedHandler}>+</button>
-                </div>
-                <ul className="ul-med" ref={ulMed}></ul>
-                <div className="d-flex flex-form my-1">
-                    <textarea
-                        className="input input-info"
-                        name="additional-message"
-                        id="additional"
-                        value={addMsg}
-                        onChange={e => onChangeGeneral(e, setAddMsg, labelMsgref)}
-                        spellCheck
-                        placeholder="Add necessary messages"
-                    ></textarea>
-                    <label
-                        htmlFor="additional"
-                        className="form-label label-info"
-                        ref={labelMsgref}
-                    >Additional message</label>
-                </div>
-                <div className="d-flex flex-form my-1">
-                    <input
-                        className="file-inp"
-                        type="file"
-                        name="file"
-                        id="patPic"
-                        value={file}
-                        onChange={handleChange}
-                        ref={inpFile}
-                    />
-                    <label htmlFor="patPic" className="file-label">Add patient picture</label>
-                </div>
-                <div className="text-center">
-                    <img className="pat-img" ref={imgRef} />
-                </div>
-                <div className="btn-container">
-                    <button className="btn btn-info"
-                        type="submit"
-                    >Save</button>
-                </div>
-            </form>
-        </section >
+        <>
+            {loading ? <BarLoader text={"Loading..."} center={true} /> :
+                <section className="container-infos">
+                    <form className="form-patient-info" method="post" onSubmit={onSubmit}>
+                        <div className="d-flex flex-form my-1">
+                            <input
+                                type="text"
+                                placeholder="John Doe"
+                                id="patient-name"
+                                name="patientName"
+                                className="input input-info"
+                                value={patName}
+                                onChange={(e) => onChangeGeneral(e, setPatName, labelNameRef)}
+                            />
+                            <label
+                                htmlFor="patient-name"
+                                className="form-label label-info"
+                                ref={labelNameRef}
+                            >Patient Name</label>
+                        </div>
+                        <div className="d-flex flex-form my-1">
+                            <input
+                                type="date"
+                                name="Patient-Age"
+                                id="patient-age"
+                                max={date}
+                                className="input input-info input-date"
+                                value={patAge}
+                                onChange={dateHandler}
+                            />
+                            <label htmlFor="patient-age" className="form-label label-info">
+                                Date of birth
+                            </label>
+                        </div>
+                        <div className="d-flex flex-form my-1">
+                            <input
+                                type="text"
+                                name="illness"
+                                id="illness"
+                                className="input input-info"
+                                placeholder="Headache"
+                                value={ill}
+                                onChange={e => onChangeGeneral(e, setIll, labelIllRef)}
+                            />
+                            <label htmlFor="illness" className="form-label label-info"
+                                ref={labelIllRef}
+                            >Illness</label>
+                        </div>
+                        <div className="d-flex flex-form my-1 p-relative">
+                            <input
+                                type="text"
+                                name="medicine"
+                                id="medicine"
+                                className="input input-info"
+                                placeholder="Medicine"
+                                value={med}
+                                onChange={e => onChangeGeneral(e, setMed, medLabel)}
+                            />
+                            <label htmlFor="medicine" ref={medLabel} className="form-label label-info"
+                            >Medicine</label>
+                            <button className="btn-add p-absolute" type="button" onClick={addMedHandler}>+</button>
+                        </div>
+                        <ul className="ul-med" ref={ulMed}></ul>
+                        <div className="d-flex flex-form my-1">
+                            <textarea
+                                className="input input-info"
+                                name="additional-message"
+                                id="additional"
+                                value={addMsg}
+                                onChange={e => onChangeGeneral(e, setAddMsg, labelMsgref)}
+                                spellCheck
+                                placeholder="Add necessary messages"
+                            ></textarea>
+                            <label
+                                htmlFor="additional"
+                                className="form-label label-info"
+                                ref={labelMsgref}
+                            >Additional message</label>
+                        </div>
+                        <div className="d-flex flex-form my-1">
+                            <input
+                                className="file-inp"
+                                type="file"
+                                name="file"
+                                id="patPic"
+                                value={file}
+                                onChange={handleChange}
+                                ref={inpFile}
+                            />
+                            <label htmlFor="patPic" className="file-label">Add patient picture</label>
+                        </div>
+                        <div className="text-center">
+                            <img className="pat-img" ref={imgRef} />
+                        </div>
+                        <div className="btn-container">
+                            <button className="btn btn-info"
+                                type="submit"
+                            >Save</button>
+                        </div>
+                    </form>
+                </section >
+            }
+        </>
+
     )
 }
 export default Addpatient

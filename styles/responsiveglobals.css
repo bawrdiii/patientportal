@@ -5,10 +5,22 @@
 
     .nav-res {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: .6em;
+        --white: #fffff18c;
+        background-color: var(--white);
+        min-height: 40px;
     }
 
-    .navbar {
+    .nav-res>.welcome-message,
+    .nav-res>.nav-ul {
         display: none;
+    }
+
+    .nav-res>.hamburger-container {
+        display: inline-block;
     }
 
     .tooltip {
@@ -24,8 +36,9 @@
     }
 
     .input:focus+.form-label,
-    .label-active {
-        transform: translate(65px, 0);
+    .label-active,
+    .label-info-active {
+        transform: translate(65px, 0) !important;
     }
 
     .input-date+label.label-info {
