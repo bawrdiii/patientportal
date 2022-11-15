@@ -12,7 +12,8 @@ const Addpatient = () => {
     const [loading, setLoading] = useState(false)
     const [patName, setPatName] = useState('')
     const [patAge, setPatAge] = useState('')
-    const [ill, setIll] = useState('')
+    const [ill, setIll] = useState("")
+    const [ills, setIlls] = useState([])
     const [addMsg, setAddMsg] = useState('')
     const [file, setFile] = useState('')
     const [med, setMed] = useState('')
@@ -97,17 +98,16 @@ const Addpatient = () => {
         e.preventDefault()
         if (patName === "" && patAge === "" && ill === "" && addMsg === "") {
             setLoading(false)
-            return <p> Salam </p>
         }
         if (base64String !== "" || undefined && extension !== "" || undefined &&
             patName !== "" &&
             patAge !== "" &&
-            ill !== ""
+            ill.length !== 0
         ) {
             setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
-                illness: ill,
+                illness: ill.map(item => item),
                 medicines: meds.map(item => item),
                 message: addMsg,
                 patientName: patName,
@@ -117,11 +117,11 @@ const Addpatient = () => {
         }
         else if (base64String === "" || base64String == undefined
             && extension !== "" || extension == undefined &&
-            patName !== "" && patAge !== "" && ill !== "") {
+            patName !== "" && patAge !== "" && ill.length !== 0) {
             setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
-                illness: ill,
+                illness: ills.map(item => item),
                 medicines: meds.map(item => item),
                 message: addMsg,
                 patientName: patName,
@@ -208,7 +208,10 @@ const Addpatient = () => {
                                 className="input input-info"
                                 placeholder="Headache"
                                 value={ill}
-                                onChange={e => onChangeGeneral(e, setIll, labelIllRef)}
+                                onChange={e => {
+                                    onChangeGeneral(e, setIll, labelIllRef)
+                                    ills.push(ill)
+                                }}
                             />
                             <label htmlFor="illness" className="form-label label-info"
                                 ref={labelIllRef}

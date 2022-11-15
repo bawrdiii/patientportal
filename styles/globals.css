@@ -682,13 +682,13 @@ input.file-inp {
     width: 80%;
     margin: auto;
     color: var(--inpInfo-white);
+    list-style: none;
 }
 
 .li-med {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    list-style: none;
 }
 
 .li-med::after {
@@ -811,7 +811,7 @@ input.file-inp {
 
 .flex-exact {
     flex-direction: column;
-    height: 110px;
+    min-height: 110px;
 }
 
 .flex-exact>.ul-med {
