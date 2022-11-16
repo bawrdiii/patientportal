@@ -814,6 +814,15 @@ input.file-inp {
     min-height: 110px;
 }
 
+.flex-exact-img {
+    flex-direction: column;
+    max-width: 155px;
+    margin: .6em auto;
+    justify-content: center;
+    align-items: center;
+}
+    
+
 .flex-exact>.ul-med {
     margin-top: .5em;
 }
@@ -847,6 +856,10 @@ input.file-inp {
     right: 30px;
     cursor: pointer;
     bottom: 0;
+}
+
+.r-0 {
+    right: -30px;
 }
 
 .editTrue~.edit {

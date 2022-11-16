@@ -1,4 +1,3 @@
-import { async } from "@firebase/util"
 import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/router"
 import { useEffect, useRef, useState } from "react"
@@ -107,8 +106,8 @@ const Addpatient = () => {
             setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
-                illness: ill.map(item => item),
-                medicines: meds.map(item => item),
+                illness: ill,
+                medicines: meds,
                 message: addMsg,
                 patientName: patName,
                 imageSrc: base64String,
@@ -121,8 +120,8 @@ const Addpatient = () => {
             setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
-                illness: ills.map(item => item),
-                medicines: meds.map(item => item),
+                illness: ills,
+                medicines: meds,
                 message: addMsg,
                 patientName: patName,
                 imageSrc: "",
