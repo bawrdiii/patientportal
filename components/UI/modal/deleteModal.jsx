@@ -1,5 +1,5 @@
 import Backdrop from "../backdrop/backdrop"
-const DeleteModal = ({ ModalClose, show, deleteHandler, ModalClose }) => {
+const DeleteModal = ({ ModalClose, show, deleteHandler }) => {
 
 
     return (
