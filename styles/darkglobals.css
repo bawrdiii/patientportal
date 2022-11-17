@@ -1,7 +1,8 @@
 /*? Dark color */
 :root {
     --bg-color: #252525;
-    --white: #eeedf0;
+    --white-dark: #eeedf0;
+    --white: #fffff18c;
     --purple: #6c72cb;
     --pink: #cb69c1;
 }
@@ -39,15 +40,15 @@ body.dark {
 .dark .navbar>.welcome-message,
 .dark .nav-ul .link,
 .dark .welcome-message {
-    color: var(--white)
+    /* color: var(--white) */
+    color: var(--white);
 }
 
-.nav-ul .link::before {
+.dark .nav-ul .link::before {
     background-color: var(--white);
 }
 
 .dark .patient-container {
-    --white: #eeedf0;
     background-color: var(--white);
     transition: box-shadow 1s ease;
 }
@@ -65,7 +66,7 @@ body.dark {
 }
 
 .dark .label-info {
-    background: -webkit-linear-gradient(50deg, var(--purple), var(--pink));
+    background: -webkit-linear-gradient(40deg, var(--purple), var(--pink));
     background-clip: text;
 }
 
@@ -99,6 +100,11 @@ body.dark {
     border-top: transparent;
 }
 
+.dark .nopat-info {
+    background-color: var(--white);
+    color: var(--purple)
+}
+
 .dark .showpat-container:hover {
     box-shadow: unset;
 }
@@ -114,7 +120,18 @@ body.dark {
 }
 
 
-.edit>.input-info::placeholder,
-.edit>.input-info {
+.dark .edit>.input-info::placeholder,
+.dark .edit>.input-info {
     color: var(--white);
+}
+
+.dark .text-loading {
+    --white: #fffff18c;
+    color: var(--white);
+}
+
+@media (max-width:768px) {
+    .dark .btn {
+        animation: unset;
+    }
 }

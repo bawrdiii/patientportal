@@ -37,24 +37,30 @@ const Infos = () => {
     return (
         <>
             <Navbar logOutHandler={logOutHandler} />
-            <section className="infos">
-                {users.map(item => {
-                    return (
-                        <Link href={`/informations/${item.id}`} key={item.id}>
-                            <section className="showpat-container">
-                                <h3 key={item.patientName}>{item.patientName}</h3>
-                                <Image
-                                    src={`data:${item.imageType};base64,${item.imageSrc}`}
-                                    key={item.id}
-                                    height="140px"
-                                    width="110px"
-                                    alt={item.patientName}
-                                />
-                            </section>
-                        </Link>
-                    )
-                })}
-            </section>
+            {users.length !== 0 ? (
+                <section className="infos">
+                    {users.map(item => {
+                        return (
+                            <Link href={`/informations/${item.id}`} key={item.id}>
+                                <section className="showpat-container">
+                                    <h3 key={item.patientName}>{item.patientName}</h3>
+                                    <Image
+                                        src={`data:${item.imageType};base64,${item.imageSrc}`}
+                                        key={item.id}
+                                        height="140px"
+                                        width="110px"
+                                        alt={item.patientName}
+                                    />
+                                </section>
+                            </Link>
+                        )
+                    })}
+                </section>
+            ) : (
+                <section className="showpat-container nopat-info">
+                    No information available
+                </section>
+            )}
         </>
     )
 }

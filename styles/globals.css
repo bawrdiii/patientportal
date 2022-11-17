@@ -767,6 +767,21 @@ input.file-inp {
     width: 180%;
 }
 
+.nopat-info {
+    --white: #fffff1dc;
+    width: 30em;
+    margin: 4em auto;
+}
+
+.nopat-info:hover {
+    cursor: default;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, .7);
+}
+
+.nopat-info::before {
+    transition: width 2s ease;
+}
+
 /* ! */
 /* ? exact info */
 .exact-patient {

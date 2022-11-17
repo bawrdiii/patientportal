@@ -26,6 +26,7 @@ const Addpatient = () => {
     const imgRef = useRef()
     const medLabel = useRef()
     const ulMed = useRef()
+    const ulIll = useRef()
 
     var extension, base64String = '';
 
@@ -106,7 +107,7 @@ const Addpatient = () => {
             setLoading(true)
             await addDoc(userCollectionRef, {
                 birthDate: patAge,
-                illness: ill,
+                illness: ills,
                 medicines: meds,
                 message: addMsg,
                 patientName: patName,
@@ -138,25 +139,24 @@ const Addpatient = () => {
     //TODO    const removePicture = () => {}
 
     //? Add med as li
-    const addMedHandler = e => {
-        const ulDom = ulMed.current
+    const addLiHandler = (ref, array, value, set, label) => {
+        const ulDom = ref.current
         //* Creating ul and adding classes
         const li = document.createElement("li")
-        if (med !== "") {
-            meds.push(med)
+        if (value !== "") {
+            array.push(value)
             li.className = `li-med`
             ulDom.appendChild(li)
-            li.textContent = `${med}`
-            li.setAttribute("id", med)
-            setMed('')
-            medLabel.current.classList.remove("label-info-active")
+            li.textContent = `${value}`
+            li.setAttribute("id", value)
+            set('')
+            label.current.classList.remove("label-info-active")
         }
         li.addEventListener("click", function (e) {
-            console.log(meds);
             let id = e.target.id
-            let index = meds.indexOf(id)
+            let index = array.indexOf(id)
             if (index > -1) {
-                meds.splice(index, 1)
+                array.splice(index, 1)
             }
             e.target.remove()
 
@@ -199,7 +199,7 @@ const Addpatient = () => {
                                 Date of birth
                             </label>
                         </div>
-                        <div className="d-flex flex-form my-1">
+                        <div className="d-flex flex-form my-1 p-relative">
                             <input
                                 type="text"
                                 name="illness"
@@ -207,28 +207,28 @@ const Addpatient = () => {
                                 className="input input-info"
                                 placeholder="Headache"
                                 value={ill}
-                                onChange={e => {
-                                    onChangeGeneral(e, setIll, labelIllRef)
-                                    ills.push(ill)
-                                }}
+                                onChange={e => onChangeGeneral(e, setIll, labelIllRef)
+                                }
                             />
                             <label htmlFor="illness" className="form-label label-info"
                                 ref={labelIllRef}
-                            >Illness</label>
+                            >Illnesses</label>
+                            <button className="btn-add p-absolute" type="button" onClick={() => addLiHandler(ulIll, ills, ill, setIll, labelIllRef)}>+</button>
                         </div>
+                        <ul className="ul-med" ref={ulIll}></ul>
                         <div className="d-flex flex-form my-1 p-relative">
                             <input
                                 type="text"
                                 name="medicine"
                                 id="medicine"
                                 className="input input-info"
-                                placeholder="Medicine"
+                                placeholder="Aspirin"
                                 value={med}
                                 onChange={e => onChangeGeneral(e, setMed, medLabel)}
                             />
                             <label htmlFor="medicine" ref={medLabel} className="form-label label-info"
                             >Medicine</label>
-                            <button className="btn-add p-absolute" type="button" onClick={addMedHandler}>+</button>
+                            <button className="btn-add p-absolute" type="button" onClick={() => addLiHandler(ulMed, meds, med, setMed, medLabel)}>+</button>
                         </div>
                         <ul className="ul-med" ref={ulMed}></ul>
                         <div className="d-flex flex-form my-1">
