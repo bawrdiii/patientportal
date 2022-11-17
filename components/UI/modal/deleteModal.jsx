@@ -1,5 +1,5 @@
 import Backdrop from "../backdrop/backdrop"
-const DeleteModal = ({ ModalClose, show, deleteHandler, noHandler }) => {
+const DeleteModal = ({ ModalClose, show, deleteHandler, ModalClose }) => {
 
 
     return (
@@ -14,7 +14,7 @@ const DeleteModal = ({ ModalClose, show, deleteHandler, noHandler }) => {
                 <h3>Are you sure to want to delete all informations?</h3>
                 <div className="button-container">
                     <button type="button" className="btn btn-delete" onClick={deleteHandler}>Yes</button>
-                    <button type="button" className="btn btn-cancel" onClick={noHandler}>No</button>
+                    <button type="button" className="btn btn-cancel" onClick={ModalClose}>No</button>
                 </div>
             </div>
         </>
