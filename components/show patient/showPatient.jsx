@@ -3,6 +3,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore"
 import { useEffect, useRef, useState } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
 import Navbar from "../navbar/navbar"
+import DeleteModal from "../UI/modal/deleteModal"
 
 
 
@@ -20,6 +21,7 @@ const ShowPatient = () => {
     const [imageSrc, setImageSrc] = useState('')
     const [imageType, setImageType] = useState('')
     const [editBtn, setEditBtn] = useState(true)
+    const [modal, setModal] = useState(false)
 
     //* Declaring variables
     var result, base64String = '', extension
@@ -304,6 +306,7 @@ const ShowPatient = () => {
 
     return (
         <>
+            <DeleteModal show={modal} />
             <Navbar logOutHandler={logOutHandler} />
             <form className="exact-patient" onSubmit={submitGeneral}>
                 <div className="d-flex flex-exact-img">
@@ -377,7 +380,7 @@ const ShowPatient = () => {
                                 type="text"
                                 name="newIll"
                             />
-                            <button className="btn edit-btn">save</button>
+                            <button className="btn edit-btn" type="button">save</button>
 
                         </div>
                     </div>
@@ -408,7 +411,7 @@ const ShowPatient = () => {
                                 type="text"
                                 name="newMed"
                             />
-                            <button className="btn edit-btn">save</button>
+                            <button className="btn edit-btn" type="button">save</button>
                         </div>
                     </div>
 
@@ -437,7 +440,11 @@ const ShowPatient = () => {
                         </div>
                     </div>
                 </section>
-
+                <button className="btn btn-delete" type="button" onClick={() => {
+                    setModal(true)
+                    document.body.classList.add("overflow-hidden")
+                }
+                }>Delete patient infos</button>
             </form>
         </>
 

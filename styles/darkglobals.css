@@ -5,6 +5,8 @@
     --white: #fffff18c;
     --purple: #6c72cb;
     --pink: #cb69c1;
+    --red: #ff5260;
+    --green: #3fba73;
 }
 
 body.dark {
@@ -26,6 +28,11 @@ body.dark {
 .dark .modal {
     background-color: var(--bg-color);
     border-color: var(--bg-color);
+}
+
+.dark .delete-modal>h3 {
+    color: var(--white);
+
 }
 
 .dark .wlc-msg {
@@ -71,7 +78,7 @@ body.dark {
 }
 
 .dark .main-form .input:focus+.form-label,
-.label-active {
+.dark .label-active {
     background-clip: unset;
     background: unset;
     color: var(--white);
@@ -93,6 +100,10 @@ body.dark {
 
 .dark .btn::before {
     background-color: var(--purple);
+}
+
+.dark .btn-delete::before {
+    background-color: var(--red);
 }
 
 .dark .input-info:focus {
