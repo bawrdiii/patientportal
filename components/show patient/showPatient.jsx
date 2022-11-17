@@ -304,9 +304,15 @@ const ShowPatient = () => {
         })
     }
 
+    //* Modal handler
+    const modalCloseHandler = () => {
+        document.body.classList.remove("overflow-hidden")
+        setModal(false)
+    }
+
     return (
         <>
-            <DeleteModal show={modal} />
+            <DeleteModal show={modal} ModalClose={modalCloseHandler} />
             <Navbar logOutHandler={logOutHandler} />
             <form className="exact-patient" onSubmit={submitGeneral}>
                 <div className="d-flex flex-exact-img">
