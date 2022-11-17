@@ -2,29 +2,46 @@ import { useEffect, useRef, useState } from "react"
 import PatientContainer from "../components/add patient/patientContainer"
 import MainAuth from "../components/mainpage/mainAuthentication"
 import Navbar from "../components/navbar/navbar"
+import { Toggle } from "../components/toggle button/toggle"
 
 
 
 const MainIndex = () => {
     //? define administrator
     const [admin, setAdmin] = useState(false)
+    const [dark, setDark] = useState(false)
 
     //? ref to elements
     const headingRef = useRef()
     const userInp = useRef()
     const passInp = useRef()
+    const labelRef = useRef()
+    const spanRef = useRef()
 
     // * UseEffect 
     useEffect(() => {
         var token = localStorage.getItem("Token")
-
+        const labelDom = labelRef.current
+        const spanDom = spanRef.current
+        var theme = localStorage.getItem("Theme")
         if (token) {
             setAdmin(true)
         }
         else {
             setAdmin(false)
         }
-
+        if (theme === "Light") {
+            setDark(false)
+            spanDom.classList.remove("toggle-label-after")
+            labelDom.classList.remove("toggle-span-after")
+            document.body.classList.remove("dark")
+        }
+        else if (theme === "Dark") {
+            setDark(true)
+            spanDom.classList.add("toggle-span-after")
+            labelDom.classList.add("toggle-label-after")
+            document.body.classList.add("dark")
+        }
     }, [])
 
 
@@ -72,6 +89,8 @@ const MainIndex = () => {
         setAdmin(false)
         localStorage.removeItem("Token")
     }
+
+
     //* Generate token and save to localstorage
     const tokenGenerator = () => {
         const date = Date.now().toString(36)
@@ -99,16 +118,48 @@ const MainIndex = () => {
     };
 
 
+    //Label onclick Handler
+    const labelOnclickHandler = e => {
+        e.preventDefault()
+
+        const spanDom = spanRef.current
+        const labelDom = labelRef.current
+
+        spanDom.classList.toggle("toggle-span-after")
+        labelDom.classList.toggle("toggle-label-after")
+        if (dark) {
+            setDark(false)
+            localStorage.setItem("Theme", "Light")
+        }
+        else {
+            setDark(true)
+            localStorage.setItem("Theme", "Dark")
+        }
+        document.body.classList.toggle("dark")
+    }
+
 
     return (
         <>
             {!admin ?
-                <MainAuth
-                    headingRef={headingRef}
-                    submitForm={btnOnclickHandler}
-                    passInputRef={passInp}
-                    userInputRef={userInp}
-                />
+                <>
+                    <div className="p-relative">
+                        <div className="p-absolute absolute-toggle">
+                            <Toggle
+                                labelOnclick={labelOnclickHandler}
+                                value={dark}
+                                refLabel={labelRef}
+                                refSpan={spanRef}
+                            />
+                        </div>
+                    </div>
+                    <MainAuth
+                        headingRef={headingRef}
+                        submitForm={btnOnclickHandler}
+                        passInputRef={passInp}
+                        userInputRef={userInp}
+                    />
+                </>
                 :
                 (
                     <>

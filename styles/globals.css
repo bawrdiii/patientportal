@@ -110,7 +110,7 @@ a {
 /* ? Heading styles */
 .welcome-message {
     position: absolute;
-    top: 5px;
+    top: 28px;
     text-align: center;
     width: 100%;
     color: var(--white);
@@ -286,8 +286,13 @@ a {
 }
 
 .toggle-label-after {
-    --white: #fffff18c;
+    --white: #e0e0e0;
     background-color: var(--white);
+}
+
+.absolute-toggle {
+    right: 3px;
+    top: 3px;
 }
 
 /* ! */
@@ -515,6 +520,7 @@ a {
     transition: background .4s ease;
     overflow: hidden;
     cursor: pointer;
+    border-radius: 15px;
 }
 
 .add-label {
@@ -689,6 +695,7 @@ input.file-inp {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+    margin: .4em 0;
 }
 
 .li-med::after {
@@ -804,6 +811,15 @@ input.file-inp {
     position: relative;
 }
 
+.reason,
+.name,
+.exact-patient>h2,
+.ul-med,
+.welcome-message,
+.nav-ul .link {
+    transition: color .6s ease;
+}
+
 .d-grid-exact {
     display: grid;
     grid-template-columns: repeat(2, 2fr);
@@ -821,7 +837,7 @@ input.file-inp {
     justify-content: center;
     align-items: center;
 }
-    
+
 
 .flex-exact>.ul-med {
     margin-top: .5em;
@@ -871,6 +887,7 @@ input.file-inp {
     display: block;
     width: 4em;
     margin: .5em auto 0 auto;
+    transition: color .8s linear, visibility .5s ease, opacity .5s linear;
 }
 
 /* ! */
@@ -894,7 +911,7 @@ input.file-inp {
     height: 3px;
     background-color: var(--black);
     transform: rotate(0);
-    transition: width .6s ease, transform .6s ease;
+    transition: width .6s ease, transform .6s ease, background .6s ease;
 
 }
 

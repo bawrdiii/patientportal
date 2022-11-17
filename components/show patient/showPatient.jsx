@@ -19,7 +19,7 @@ const ShowPatient = () => {
     const [edit, setEdit] = useState(false)
     const [imageSrc, setImageSrc] = useState('')
     const [imageType, setImageType] = useState('')
-    const [editBtn, setEditBtn] = useState(false)
+    const [editBtn, setEditBtn] = useState(true)
 
     //* Declaring variables
     var result, base64String = '', extension
@@ -27,6 +27,7 @@ const ShowPatient = () => {
     const router = useRouter()
 
     const inpFile = useRef()
+    const btnSaveRef = useRef()
 
     useEffect(() => {
         if (router.query.patId) {
@@ -40,6 +41,7 @@ const ShowPatient = () => {
                 setImageSrc(result.imageSrc)
                 setImageType(result.imageType)
                 if (imgTyp !== "" && imgTyp !== "") {
+                    setEditBtn(false)
                     setSrc(`data:${imgTyp};base64,${imgSrc}`)
                 } else {
                     setSrc("")
@@ -53,7 +55,6 @@ const ShowPatient = () => {
             }
             getUserData()
         }
-
     }, [router.isReady])
 
 
@@ -268,9 +269,8 @@ const ShowPatient = () => {
 
     //* New patient pic handler
     const patPicHandler = async () => {
-        editBtn ? setEditBtn(false) : setEditBtn(true)
-        console.log(base64String, extension);
         if (base64String !== "" || base64String == undefined && extension !== undefined) {
+            editBtn ? setEditBtn(false) : setEditBtn(true)
             setSrc(`data:${extension};base64,${base64String}`)
             setImageSrc(base64String)
             await setDoc(doc(db, "Informations", router.query.patId), {
@@ -287,11 +287,19 @@ const ShowPatient = () => {
 
     //!
     //* Delete patient pic handler
-    const deletePicHandler = () => {
+    const deletePicHandler = async () => {
         editBtn ? setEditBtn(false) : setEditBtn(true)
         setSrc("")
         setImageSrc("")
-
+        await setDoc(doc(db, "Informations", router.query.patId), {
+            patientName: patName,
+            birthDate: age,
+            medicines: meds,
+            imageType: "",
+            imageSrc: "",
+            illness: ill,
+            message: msg
+        })
     }
 
     return (
@@ -306,13 +314,17 @@ const ShowPatient = () => {
                             <input type="file" className="file-inp" id="patNewPic" value={file}
                                 onChange={fileHandler} ref={inpFile}
                             />
-                            <label className="edit-doc r-0" htmlFor="patNewPic" onClick={() => setEditBtn(true)}>
+                            <label className="edit-doc r-0" htmlFor="patNewPic" onClick={() => {
+                                btnSaveRef.current.classList.remove("hidden")
+                                setEditBtn(true)
+                            }
+                            }>
                             </label>
                         </strong>
                     }
 
 
-                    {editBtn ? <button className="btn edit-btn" type="button" onClick={patPicHandler}>save</button> :
+                    {editBtn ? <button className="btn edit-btn hidden" ref={btnSaveRef} type="button" onClick={patPicHandler}>save</button> :
                         <button className="btn edit-btn" type="button" onClick={deletePicHandler}>delete</button>
                     }
                 </div>
