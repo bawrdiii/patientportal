@@ -364,7 +364,7 @@ a {
     padding: .4em;
     width: 300px;
     max-width: 300px;
-    margin: 5em auto;
+    margin: auto;
     backdrop-filter: blur(15px);
 }
 
