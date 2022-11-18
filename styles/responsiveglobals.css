@@ -78,11 +78,6 @@
         animation: beforeActive 5s infinite alternate ease;
     }
 
-    .container {
-        display: block;
-        margin-top: 7em;
-    }
-
     .welcome {
         animation: unset;
     }
