@@ -47,7 +47,7 @@ body.dark {
 }
 
 .dark .patient-container {
-    background-color: var(--white);
+    background-color: var(--white-dunkel);
     transition: box-shadow 1s ease;
 }
 

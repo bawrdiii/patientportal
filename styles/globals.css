@@ -216,7 +216,7 @@ a {
 }
 
 
-@media (max-width:60rem) {
+@media (min-width:426px) and (max-width:768px) {
 
     .modal,
     .delete-modal {
@@ -228,11 +228,10 @@ a {
     }
 }
 
-@media (max-width:20rem) {
-
-    .modal,
+@media (max-width:425.5px) {
     .delete-modal {
-        width: 45%;
+        width: 80%;
+        left: 10%;
     }
 }
 
