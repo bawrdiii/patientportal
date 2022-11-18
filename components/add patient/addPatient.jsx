@@ -253,7 +253,7 @@ const Addpatient = () => {
                                 htmlFor="additional"
                                 className="form-label label-info"
                                 ref={labelMsgref}
-                            >Additional message</label>
+                            >Specific message</label>
                         </div>
                         <div className="d-flex flex-form my-1">
                             <input

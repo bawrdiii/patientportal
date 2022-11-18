@@ -432,12 +432,12 @@ const ShowPatient = () => {
                     <div className="d-flex flex-exact my-1">
                         {msg !== "" ? (
                             <>
-                                <strong className="reason">Additional message
+                                <strong className="reason">Specific message
                                     <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                                 <p>{msg}</p>
                             </>
-                        ) : <strong className="reason">There isnt any additional message
+                        ) : <strong className="reason">There isnt any specific message
                             <span className="edit-doc" onClick={showEditHandler}></span>
                         </strong>}
                         <div className="edit transition">
