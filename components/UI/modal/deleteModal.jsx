@@ -13,7 +13,7 @@ const DeleteModal = ({ ModalClose, show, deleteHandler }) => {
             >
                 <h3>Are you sure to want to delete all informations?</h3>
                 <div className="button-container">
-                    <button type="button" className="btn btn-delete" onClick={deleteHandler}>Yes</button>
+                    <button type="button" className="btn btn-delete delete-all" onClick={deleteHandler}>Yes</button>
                     <button type="button" className="btn btn-cancel" onClick={ModalClose}>No</button>
                 </div>
             </div>
