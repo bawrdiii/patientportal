@@ -48,7 +48,7 @@ const Addpatient = () => {
 
         const res = `${yy}/${mm}/${dd}`
         setDate(res)
-    })
+    }, [route.isReady])
 
     //? Handling change 
     const onChangeGeneral = (e, set, ref) => {
@@ -157,7 +157,7 @@ const Addpatient = () => {
             ulDom.appendChild(li)
             li.textContent = `${value}`
             li.setAttribute("id", value)
-            set('')
+            set("")
             label.current.classList.remove("label-info-active")
         }
         li.addEventListener("click", function (e) {

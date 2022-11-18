@@ -22,7 +22,7 @@ const Infos = () => {
         }
 
         getUser()
-    }, [])
+    }, [userCollectionRef])
 
     const router = useRouter()
     const logOutHandler = () => {

@@ -52,7 +52,7 @@ const Navbar = ({ logOutHandler }) => {
             document.body.classList.add("dark")
         }
 
-    })
+    }, [])
 
     //* closing Modal
     const modalCloseHandler = () => {

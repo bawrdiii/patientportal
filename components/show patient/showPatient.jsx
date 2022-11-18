@@ -357,10 +357,10 @@ const ShowPatient = () => {
                                 <p>{result}</p>
                                 <div className="edit transition">
                                     <input type="date" className="input input-info" name="newAge" />
-                                    <button className="btn edit-btn">save</button>
+                                    <button className="btn edit-btn" type="submit">save</button>
                                 </div>
                             </div>
-                        ) : <strong className="reason">َAge isn't entered</strong>
+                        ) : <strong className="reason">َAge isn&apos;t entered</strong>
                     }
 
 
@@ -382,7 +382,7 @@ const ShowPatient = () => {
                             </>
                         ) :
                             <>
-                                <strong className="reason">Ill isn't entered
+                                <strong className="reason">Ill isn&apos;t entered
                                     <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                             </>
@@ -394,7 +394,7 @@ const ShowPatient = () => {
                                 type="text"
                                 name="newIll"
                             />
-                            <button className="btn edit-btn" type="button">save</button>
+                            <button className="btn edit-btn" type="submit">save</button>
 
                         </div>
                     </div>
@@ -425,7 +425,7 @@ const ShowPatient = () => {
                                 type="text"
                                 name="newMed"
                             />
-                            <button className="btn edit-btn" type="button">save</button>
+                            <button className="btn edit-btn" type="submit">save</button>
                         </div>
                     </div>
 
@@ -437,7 +437,7 @@ const ShowPatient = () => {
                                 </strong>
                                 <p>{msg}</p>
                             </>
-                        ) : <strong className="reason">There ist any additional message
+                        ) : <strong className="reason">There isnt any additional message
                             <span className="edit-doc" onClick={showEditHandler}></span>
                         </strong>}
                         <div className="edit transition">
@@ -449,7 +449,7 @@ const ShowPatient = () => {
                                 onChange={e => setNewMsg(e.target.value)}
                                 name="newMsg"
                             />
-                            <button className="btn edit-btn">save</button>
+                            <button className="btn edit-btn" type="submit">save</button>
 
                         </div>
                     </div>
