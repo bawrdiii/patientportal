@@ -145,10 +145,19 @@
 
     .d-grid-exact {
         grid-template-columns: 1fr;
+        gap: .5em;
+    }
+
+    .d-grid-exact>.my-1 {
+        margin: 0 !important;
     }
 
     .flex-exact {
-        height: unset;
+        min-height: unset;
+    }
+
+    .flex-exact-img {
+        gap: .5em;
     }
 
     .d-block~.edit {
@@ -164,6 +173,7 @@
     .exact-patient {
         max-width: 90%;
         padding: .3em;
+        margin: .5em auto;
     }
 
     /* ? Define button animation */

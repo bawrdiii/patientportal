@@ -315,6 +315,7 @@ const ShowPatient = () => {
         const userDoc = doc(db, "Informations", router.query.patId)
         await deleteDoc(userDoc)
         setModal(false)
+        document.body.classList.remove("overflow-hidden")
         router.push("/informations")
     }
     return (
@@ -341,7 +342,7 @@ const ShowPatient = () => {
 
 
                     {editBtn ? <button className="btn edit-btn hidden" ref={btnSaveRef} type="button" onClick={patPicHandler}>save</button> :
-                        <button className="btn edit-btn" type="button" onClick={deletePicHandler}>delete</button>
+                        <button className="btn btn-delete delete-pic my-1" type="button" onClick={deletePicHandler}>Delete picture</button>
                     }
                 </div>
                 <h2><span className="name">Name: </span>{patName}</h2>
@@ -453,7 +454,7 @@ const ShowPatient = () => {
                         </div>
                     </div>
                 </section>
-                <button className="btn btn-delete" type="button" onClick={() => {
+                <button className="btn btn-delete delete-all" type="button" onClick={() => {
                     setModal(true)
                     document.body.classList.add("overflow-hidden")
                 }

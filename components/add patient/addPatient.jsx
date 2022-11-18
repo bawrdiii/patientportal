@@ -79,7 +79,7 @@ const Addpatient = () => {
 
                 img.setAttribute("src", e.target.result);
                 img.setAttribute("alt", "Patient pictue");
-
+                img.classList.add("exist")
             };
             extension = file[0].type;
 
@@ -96,8 +96,9 @@ const Addpatient = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        if (patName === "" && patAge === "" && ill === "" && addMsg === "") {
+        if (patName === "") {
             setLoading(false)
+            return
         }
         if (base64String !== "" || undefined && extension !== "" || undefined &&
             patName !== "" &&
@@ -136,7 +137,14 @@ const Addpatient = () => {
 
     }
 
-    const removePicture = () => { }
+    const removePicture = () => {
+        const img = imgRef.current
+        extension = ""
+        base64String = ""
+        img.removeAttribute("src")
+        img.removeAttribute("alt")
+        img.classList.remove("exist")
+    }
 
     //? Add med as li
     const addLiHandler = (ref, array, value, set, label) => {
@@ -259,9 +267,9 @@ const Addpatient = () => {
                             />
                             <label htmlFor="patPic" className="file-label">Add patient picture</label>
                         </div>
-                        <div className="text-center">
+                        <div className="d-flex flex-img">
                             <img className="pat-img" ref={imgRef} />
-                            <button className="btn btn-delete delete-pic hidde" type="button">
+                            <button className="btn btn-delete delete-pic dlt-hdn" type="button" onClick={removePicture}>
                                 Delete picture
                             </button>
                         </div>

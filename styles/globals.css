@@ -33,7 +33,7 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('../assets/Images/check.jpg');
     background-position: center;
     background-size: cover;
@@ -179,6 +179,11 @@ a {
 .btn-delete::before {
     --red: #b70017;
     background-color: var(--red) !important;
+}
+
+.exact-patient>.delete-all {
+    width: 10em;
+    height: 28px;
 }
 
 .button-container>.btn-cancel {
@@ -714,10 +719,25 @@ input.file-inp {
     height: 0;
 }
 
+.flex-img {
+    flex-direction: column;
+    align-items: center;
+}
+
 .pat-img {
-    max-width: 450px;
-    max-height: 450px;
+    max-width: 300px;
+    max-height: 300px;
     border-radius: 40px;
+}
+
+.dlt-hdn {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.exist~.dlt-hdn {
+    visibility: visible;
+    opacity: 1;
 }
 
 .delete-pic {
@@ -919,7 +939,7 @@ input.file-inp {
 }
 
 .exact-patient img {
-    max-width: 85px;
+    max-width: 100px;
     max-height: 115px;
 }
 
