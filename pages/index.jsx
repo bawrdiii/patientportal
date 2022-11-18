@@ -42,6 +42,12 @@ const MainIndex = () => {
             labelDom.classList.add("toggle-label-after")
             document.body.classList.add("dark")
         }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches && !theme) {
+            setDark(true)
+            spanDom.classList.add("toggle-span-after")
+            labelDom.classList.add("toggle-label-after")
+            document.body.classList.add("dark")
+        }
     }, [])
 
 
