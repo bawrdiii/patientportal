@@ -64,7 +64,7 @@ body.dark {
 }
 
 .dark .label-info {
-    background: -webkit-linear-gradient(40deg, var(--purple), var(--pink));
+    background: linear-gradient(to right, var(--purple), var(--pink));
     background-clip: text;
 }
 

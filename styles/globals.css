@@ -397,7 +397,7 @@ a {
 .form-label {
     max-width: 5em;
     font-size: 1.1em;
-    background: -webkit-linear-gradient(50deg, #414141, #000000);
+    background: linear-gradient(50deg, #414141, #000000);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -638,7 +638,7 @@ a {
 
 .label-info {
     max-width: 9em;
-    background: -webkit-linear-gradient(50deg, #2c3e50, #000);
+    background: linear-gradient(50deg, #2c3e50, #000);
     transform: translate(60px, 22px);
     background-clip: text;
 }
