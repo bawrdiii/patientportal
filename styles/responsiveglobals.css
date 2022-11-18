@@ -19,10 +19,6 @@
         display: none;
     }
 
-    .my-1 {
-        margin: .6em auto;
-    }
-
     .nav-res>.hamburger-container {
         display: inline-block;
     }
@@ -91,9 +87,6 @@
         margin: 1em auto;
     }
 
-    .btn-container {
-        margin: 0;
-    }
 
     /* 
     .form-patient-info>.my-1 {
@@ -111,6 +104,10 @@
 
     .add-button {
         color: var(--black);
+    }
+
+    .file-label:hover:before {
+        width: unset;
     }
 
     .file-label::before {
