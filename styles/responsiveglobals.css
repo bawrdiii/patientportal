@@ -234,7 +234,6 @@
 }
 
 @media (max-width:426px) {
-
     .infos {
         grid-template-columns: 1fr;
     }
