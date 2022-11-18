@@ -80,7 +80,10 @@ const Addpatient = () => {
                 img.setAttribute("src", e.target.result);
                 img.setAttribute("alt", "Patient pictue");
                 img.classList.add("exist")
-            };
+                img.classList.add("pat-img")
+                img.style.height = "auto"
+                img.style.width = "auto"
+            }
             extension = file[0].type;
 
             fileReader.readAsDataURL(file[0])
@@ -143,7 +146,10 @@ const Addpatient = () => {
         base64String = ""
         img.removeAttribute("src")
         img.removeAttribute("alt")
-        img.classList.remove("exist")
+        img.removeAttribute("class")
+        img.style.height = '0'
+        img.style.width = '0'
+
     }
 
     //? Add med as li
@@ -268,7 +274,7 @@ const Addpatient = () => {
                             <label htmlFor="patPic" className="file-label">Add patient picture</label>
                         </div>
                         <div className="d-flex flex-img">
-                            <img className="pat-img" ref={imgRef} />
+                            <img ref={imgRef} />
                             <button className="btn btn-delete delete-pic dlt-hdn" type="button" onClick={removePicture}>
                                 Delete picture
                             </button>

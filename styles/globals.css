@@ -722,6 +722,7 @@ input.file-inp {
 .flex-img {
     flex-direction: column;
     align-items: center;
+    gap: .7em;
 }
 
 .pat-img {
