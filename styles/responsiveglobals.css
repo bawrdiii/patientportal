@@ -235,6 +235,10 @@
 
 @media (max-width:426px) {
 
+    .infos {
+        grid-template-columns: 1fr;
+    }
+
     .input+.form-label {
         transform: translate(40px, 25px);
     }

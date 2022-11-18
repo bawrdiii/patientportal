@@ -216,16 +216,13 @@ a {
 }
 
 
-@media (min-width:426px) and (max-width:768px) {
+@media (max-width:768px) {
 
-    .modal,
-    .delete-modal {
-        width: 40%;
+    .modal {
+        width: 45%;
     }
 
-    .delete-modal {
-        left: 28%;
-    }
+
 }
 
 @media (max-width:425.5px) {
