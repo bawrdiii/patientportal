@@ -28,7 +28,7 @@ body.dark {
 }
 
 .dark .wlc-msg {
-    color: var(--white);
+    color: var(--white-dunkel);
 }
 
 
@@ -39,12 +39,11 @@ body.dark {
 .dark .navbar>.welcome-message,
 .dark .nav-ul .link,
 .dark .welcome-message {
-    /* color: var(--white) */
-    color: var(--white);
+    color: var(--white-dunkel);
 }
 
 .dark .nav-ul .link::before {
-    background-color: var(--white);
+    background-color: var(--white-dunkel);
 }
 
 .dark .patient-container {

@@ -19,6 +19,10 @@
         display: none;
     }
 
+    .my-1 {
+        margin: .6em auto;
+    }
+
     .nav-res>.hamburger-container {
         display: inline-block;
     }
@@ -91,9 +95,10 @@
         margin: 0;
     }
 
+    /* 
     .form-patient-info>.my-1 {
         margin: 0 !important;
-    }
+    } */
 
     .patient-container::before {
         all: unset;
@@ -143,9 +148,9 @@
         gap: .5em;
     }
 
-    .d-grid-exact>.my-1 {
+    /* .d-grid-exact>.my-1 {
         margin: 0 !important;
-    }
+    } */
 
     .flex-exact {
         min-height: unset;
@@ -253,6 +258,10 @@
         transform: translate(40px, 0) !important;
     }
 
+    .btn-add {
+        right: 40px;
+    }
+
 }
 
 @media (min-width:427px) and (max-width:767px) {
@@ -272,6 +281,13 @@
         transform: translate(40px, 0) !important;
     }
 
+}
+
+
+@media (min-width:580px) and (max-width:768px) {
+    .btn-add {
+        right: 70px;
+    }
 }
 
 /* ! */
