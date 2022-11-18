@@ -131,12 +131,12 @@ const Addpatient = () => {
         }
 
         setTimeout(() => {
-            document.location.reload()
+            route.push("/informations")
         }, 1000);
 
     }
 
-    //TODO    const removePicture = () => {}
+    const removePicture = () => { }
 
     //? Add med as li
     const addLiHandler = (ref, array, value, set, label) => {
@@ -261,6 +261,9 @@ const Addpatient = () => {
                         </div>
                         <div className="text-center">
                             <img className="pat-img" ref={imgRef} />
+                            <button className="btn btn-delete delete-pic hidde" type="button">
+                                Delete picture
+                            </button>
                         </div>
                         <div className="btn-container">
                             <button className="btn btn-info"

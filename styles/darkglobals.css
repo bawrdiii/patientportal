@@ -1,13 +1,5 @@
 /*? Dark color */
-:root {
-    --bg-color: #252525;
-    --white-dark: #eeedf0;
-    --white: #fffff18c;
-    --purple: #6c72cb;
-    --pink: #cb69c1;
-    --red: #ff5260;
-    --green: #3fba73;
-}
+@import "./globals.css";
 
 body.dark {
     background-image: unset;

@@ -18,6 +18,13 @@
     --error: #cb0000;
     --purpule: #4e204D;
     --success: #00a25c;
+    --bg-color: #252525;
+    --white-dark: #eeedf0;
+    --white-dunkel: #fffff18c;
+    --purple: #6c72cb;
+    --pink: #cb69c1;
+    --dark-red: #ff5260;
+    --green: #3fba73;
 }
 
 body {
@@ -163,19 +170,15 @@ a {
     align-items: center;
 }
 
-.button-container>.btn-delete {
-    width: 90px;
-    height: 28px;
-}
 
 .button-container>.btn-delete:hover {
     --white: #fff;
     color: var(--white);
 }
 
-.button-container>.btn-delete::before {
+.btn-delete::before {
     --red: #b70017;
-    background-color: var(--red);
+    background-color: var(--red) !important;
 }
 
 .button-container>.btn-cancel {
@@ -522,6 +525,7 @@ a {
     padding: .6em;
     border-radius: 10px;
     background-color: var(--melo-blue);
+    --white: #fff;
     color: var(--white);
     text-align: center;
     visibility: hidden;
@@ -564,7 +568,7 @@ a {
     --white: #fffff18c;
     background-color: var(--white);
     margin: 1em auto 0 auto;
-    transition: background .4s ease;
+    transition: box-shadow .7s ease;
     overflow: hidden;
     cursor: pointer;
     border-radius: 15px;
@@ -599,6 +603,10 @@ a {
 
 .patient-container:hover::before {
     width: 150%;
+}
+
+.patient-container:hover {
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .5);
 }
 
 .patient-container:hover .add-button {
@@ -710,6 +718,11 @@ input.file-inp {
     max-width: 450px;
     max-height: 450px;
     border-radius: 40px;
+}
+
+.delete-pic {
+    width: 7.5em;
+    transition: color .8s linear, visibility .5s ease, opacity .5s ease;
 }
 
 .btn-add {
@@ -952,10 +965,6 @@ input.file-inp {
     transition: color .8s linear, visibility .5s ease, opacity .5s linear;
 }
 
-.btn-delete {
-    width: 10em;
-    height: 35px;
-}
 
 /* ! */
 

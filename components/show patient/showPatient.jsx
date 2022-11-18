@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore"
 import { useEffect, useRef, useState } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
 import Navbar from "../navbar/navbar"
@@ -310,9 +310,16 @@ const ShowPatient = () => {
         setModal(false)
     }
 
+    //* Delete all information
+    const deletePatientHandler = async () => {
+        const userDoc = doc(db, "Informations", router.query.patId)
+        await deleteDoc(userDoc)
+        setModal(false)
+        router.push("/informations")
+    }
     return (
         <>
-            <DeleteModal show={modal} ModalClose={modalCloseHandler} />
+            <DeleteModal show={modal} ModalClose={modalCloseHandler} deleteHandler={deletePatientHandler} />
             <Navbar logOutHandler={logOutHandler} />
             <form className="exact-patient" onSubmit={submitGeneral}>
                 <div className="d-flex flex-exact-img">
