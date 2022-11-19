@@ -44,12 +44,13 @@ const Infos = () => {
                             <Link href={`/informations/${item.id}`} key={item.id}>
                                 <section className="showpat-container">
                                     <h3 key={item.patientName}>{item.patientName}</h3>
-                                    <Image
+                                    <img
                                         src={`data:${item.imageType};base64,${item.imageSrc}`}
                                         key={item.id}
-                                        height="140px"
-                                        width="110px"
+                                        // height="140px"
+                                        // width="110px"
                                         alt={item.patientName}
+                                        className="info-img"
                                     />
                                 </section>
                             </Link>

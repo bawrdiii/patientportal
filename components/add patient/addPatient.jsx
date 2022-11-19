@@ -81,8 +81,7 @@ const Addpatient = () => {
                 img.setAttribute("alt", "Patient pictue");
                 img.classList.add("exist")
                 img.classList.add("pat-img")
-                img.style.height = "auto"
-                img.style.width = "auto"
+                img.removeAttribute("style")
             }
             extension = file[0].type;
 

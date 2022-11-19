@@ -809,6 +809,7 @@ input.file-inp {
     position: relative;
     transition: box-shadow .5s ease;
     border-radius: 15px;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -839,6 +840,11 @@ input.file-inp {
 
 .showpat-container:hover::before {
     width: 180%;
+}
+
+.info-img {
+    max-width: 170px;
+    max-height: 150px;
 }
 
 .nopat-info {
