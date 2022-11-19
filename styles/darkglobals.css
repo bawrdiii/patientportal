@@ -68,12 +68,20 @@ body.dark {
     background-clip: text;
 }
 
-.dark .main-form .input:focus+.form-label,
+.dark .main-form .input+.form-label,
 .dark .label-active {
     background-clip: unset;
     background: unset;
     color: var(--white);
     -webkit-text-fill-color: unset;
+}
+
+.dark .input {
+    color: var(--white);
+}
+
+.dark .main-form .input::placeholder {
+    color: var(--white-dunkel);
 }
 
 .dark .btn {
