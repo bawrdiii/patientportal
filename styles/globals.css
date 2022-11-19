@@ -796,11 +796,12 @@ input.file-inp {
 
 /* ? show patient */
 .infos {
+    max-width: 1250px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     justify-items: center;
-    margin: 1em 0;
+    margin: 1em auto;
 }
 
 .showpat-container {
