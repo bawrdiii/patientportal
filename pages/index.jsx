@@ -47,6 +47,7 @@ const MainIndex = () => {
             spanDom.classList.add("toggle-span-after")
             labelDom.classList.add("toggle-label-after")
             document.body.classList.add("dark")
+            localStorage.setItem("Theme", "Dark")
         }
     }, [])
 
