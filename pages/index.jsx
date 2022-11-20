@@ -3,8 +3,8 @@ import PatientContainer from "../components/add patient/patientContainer"
 import MainAuth from "../components/mainpage/mainAuthentication"
 import Navbar from "../components/navbar/navbar"
 import { Toggle } from "../components/toggle button/toggle"
-
-
+import Head from "next/head"
+import Img from "../assets/Images/check.jpg"
 
 const MainIndex = () => {
     //? define administrator
@@ -148,6 +148,21 @@ const MainIndex = () => {
 
     return (
         <>
+            <Head>
+                <title>Patient Portal</title>
+                <meta name="title" content="Patient Portal" />
+                <meta name="description" content="a patient portal where nurses and doctors can log in and enter patient data It is completely secure and simple to use." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://patientportal-bawrdiii.vercel.app/" />
+                <meta property="og:title" content="Patient Portal" />
+                <meta property="og:description" content="a patient portal where nurses and doctors can log in and enter patient data It is completely secure and simple to use." />
+                <meta property="og:image" content={Img} />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://patientportal-bawrdiii.vercel.app/" />
+                <meta property="twitter:title" content="Patient Portal" />
+                <meta property="twitter:description" content="a patient portal where nurses and doctors can log in and enter patient data It is completely secure and simple to use." />
+                <meta property="twitter:image" content={Img} />
+            </Head>
             {!admin ?
                 <>
                     <div className="p-relative">
@@ -174,7 +189,6 @@ const MainIndex = () => {
                         <PatientContainer />
                     </>
                 )
-
             }
         </>
     )
