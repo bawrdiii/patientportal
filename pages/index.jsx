@@ -5,24 +5,25 @@ import Navbar from "../components/navbar/navbar"
 import { Toggle } from "../components/toggle button/toggle"
 import Head from "next/head"
 import Img from "../assets/Images/check.jpg"
+import { BarLoader } from "react-spinner-animated"
 
 const MainIndex = () => {
     //? define administrator
     const [admin, setAdmin] = useState(false)
     const [dark, setDark] = useState(false)
+    const [show, setShow] = useState(false)
 
     //? ref to elements
     const headingRef = useRef()
     const userInp = useRef()
     const passInp = useRef()
-    const labelRef = useRef()
     const spanRef = useRef()
-
+    const labelRef = useRef()
     // * UseEffect 
     useEffect(() => {
         var token = localStorage.getItem("Token")
-        const labelDom = labelRef.current
-        const spanDom = spanRef.current
+        const labelDom = document.querySelector(".toggle-label")
+        const spanDom = document.querySelector(".toggle-span")
         var theme = localStorage.getItem("Theme")
         if (token) {
             setAdmin(true)
@@ -30,24 +31,26 @@ const MainIndex = () => {
         else {
             setAdmin(false)
         }
-        if (theme === "Light") {
-            setDark(false)
-            spanDom.classList.remove("toggle-label-after")
-            labelDom.classList.remove("toggle-span-after")
-            document.body.classList.remove("dark")
-        }
-        else if (theme === "Dark") {
-            setDark(true)
-            spanDom.classList.add("toggle-span-after")
-            labelDom.classList.add("toggle-label-after")
-            document.body.classList.add("dark")
-        }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches && !theme) {
-            setDark(true)
-            spanDom.classList.add("toggle-span-after")
-            labelDom.classList.add("toggle-label-after")
-            document.body.classList.add("dark")
-            localStorage.setItem("Theme", "Dark")
+        if (spanDom && labelDom) {
+            if (theme === "Light") {
+                setDark(false)
+                spanDom.classList.remove("toggle-label-after")
+                labelDom.classList.remove("toggle-span-after")
+                document.body.classList.remove("dark")
+            }
+            else if (theme === "Dark") {
+                setDark(true)
+                spanDom.classList.add("toggle-span-after")
+                labelDom.classList.add("toggle-label-after")
+                document.body.classList.add("dark")
+            }
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches && !theme) {
+                setDark(true)
+                spanDom.classList.add("toggle-span-after")
+                labelDom.classList.add("toggle-label-after")
+                document.body.classList.add("dark")
+                localStorage.setItem("Theme", "Dark")
+            }
         }
     }, [])
 
@@ -67,14 +70,13 @@ const MainIndex = () => {
         const password = formData.get("Password")
 
         if (username.toLowerCase() === "admin" && password.trim() === "admin") {
-            headingDom.classList.add("welcome")
+            setShow(true)
             var token = tokenGenerator()
             localStorage.setItem("Token", `Bearer ${token}`)
             setTimeout(() => {
+                setShow(false)
                 setAdmin(true)
-
-                headingDom.classList.remove("welcome")
-            }, 2000);
+            }, 700);
         }
         if (username.toLowerCase() !== "admin" && username !== "") {
             setError(userInpDom, `Username doesn't exist, sorry!`)
@@ -163,7 +165,8 @@ const MainIndex = () => {
                 <meta property="twitter:description" content="a patient portal where nurses and doctors can log in and enter patient data It is completely secure and simple to use." />
                 <meta property="twitter:image" content={Img} />
             </Head>
-            {!admin ?
+            {show && < BarLoader text="Loading..." />}
+            {!admin && !show &&
                 <>
                     <div className="p-relative">
                         <div className="p-absolute absolute-toggle">
@@ -182,15 +185,16 @@ const MainIndex = () => {
                         userInputRef={userInp}
                     />
                 </>
-                :
-                (
-                    <>
-                        <Navbar logOutHandler={logOutHandler} />
-                        <PatientContainer />
-                    </>
-                )
             }
+            {admin && !show &&
+                <>
+                    <Navbar logOutHandler={logOutHandler} headingContent="Welcome admin" />
+                    <PatientContainer />
+                </>
+            }
+
         </>
+
     )
 }
 export default MainIndex

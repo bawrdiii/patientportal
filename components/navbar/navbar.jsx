@@ -5,7 +5,7 @@ import { Toggle } from "../toggle button/toggle";
 import Modal from "../UI/modal/modal";
 
 
-const Navbar = ({ logOutHandler }) => {
+const Navbar = ({ logOutHandler, headingContent }) => {
 
     const [dark, setDark] = useState(false)
     const [show, setShow] = useState(false)
@@ -96,7 +96,9 @@ const Navbar = ({ logOutHandler }) => {
                     refSpan={spanRef}
                 />
                 <Hamburger pElement={pElement} hamHandler={hamHandler} />
-                <h2 className="welcome-message">Welcome admin</h2>
+                <div className="welcome-msg-container">
+                    <h2 className="welcome-message">{headingContent}</h2>
+                </div>
                 <ul className="nav-ul">
                     <li>
                         <Link href="/">

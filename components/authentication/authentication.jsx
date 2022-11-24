@@ -19,8 +19,8 @@ const Authentication = ({ userOnchange,
 
     return (
         <>
+            <h2 className="welcome-message" ref={headingRef}>Welcome to patient portal</h2>
             <section className="container">
-                <h2 className="welcome-message" ref={headingRef}>Welcome to patient portal</h2>
                 <form className="main-form" method="post" onSubmit={SubmitForm}>
                     <div className="d-flex flex-form">
                         <input

@@ -1,10 +1,12 @@
 import { useRouter } from "next/router"
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore"
-import { useEffect, useRef, useState } from "react"
+import { deleteDoc, doc, getDoc } from "firebase/firestore"
+import { useEffect, useState } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
 import Navbar from "../navbar/navbar"
 import DeleteModal from "../UI/modal/deleteModal"
-
+import Image from "next/image"
+import AddUser from "../../assets/Images/adduser.png"
+import Link from "next/link"
 
 
 const ShowPatient = () => {
@@ -12,24 +14,16 @@ const ShowPatient = () => {
     const [patName, setPatName] = useState('')
     const [age, setAge] = useState('')
     const [ill, setIll] = useState([])
-    const [src, setSrc] = useState('')
     const [meds, setMeds] = useState([])
-    const [file, setFile] = useState('')
+    const [src, setSrc] = useState('')
     const [msg, setMsg] = useState('')
-    const [newMsg, setNewMsg] = useState("")
-    const [edit, setEdit] = useState(false)
     const [imageSrc, setImageSrc] = useState('')
-    const [imageType, setImageType] = useState('')
-    const [editBtn, setEditBtn] = useState(true)
     const [modal, setModal] = useState(false)
 
     //* Declaring variables
-    var result, base64String = '', extension
+    var result
 
     const router = useRouter()
-
-    const inpFile = useRef()
-    const btnSaveRef = useRef()
 
     useEffect(() => {
         if (router.query.patId) {
@@ -41,9 +35,7 @@ const ShowPatient = () => {
                 imgSrc = result.imageSrc
                 imgTyp = result.imageType
                 setImageSrc(result.imageSrc)
-                setImageType(result.imageType)
                 if (imgTyp !== "" && imgTyp !== "") {
-                    setEditBtn(false)
                     setSrc(`data:${imgTyp};base64,${imgSrc}`)
                 } else {
                     setSrc("")
@@ -53,7 +45,6 @@ const ShowPatient = () => {
                 setIll(result.illness)
                 setMeds(result.medicines)
                 setMsg(result.message)
-                setNewMsg(`${result.message} `)
             }
             getUserData()
         }
@@ -94,170 +85,6 @@ const ShowPatient = () => {
     }
     birthHandler()
 
-    const updateDocMed = async (e) => {
-        var id = e.target.id;
-        e.target.remove()
-        const index = meds.indexOf(id)
-        if (index > -1) {
-            meds.splice(index, 1)
-        }
-        await setDoc(doc(db, "Informations", router.query.patId), {
-            patientName: patName,
-            birthDate: age,
-            medicines: meds,
-            imageType: imageType,
-            imageSrc: imageSrc,
-            illness: ill,
-            message: msg
-        })
-
-    }
-
-    //!
-    //* File handler
-    const fileHandler = () => {
-        const fileDom = inpFile.current
-        var file = fileDom.files
-
-        if (file.length > 0) {
-            var fileReader = new FileReader()
-            fileReader.onload = function (e) {
-                base64String = fileReader.result
-                    .replace("data:", "")
-                    .replace(/^.+,/, "")
-            };
-            extension = file[0].type
-            fileReader.readAsDataURL(file[0])
-        }
-    }
-
-    //!
-    //* Submit form handler
-
-    const submitGeneral = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target)
-        const inpObj = Object.fromEntries(formData)
-
-        const newAge = formData.get("newAge")
-        const newIll = formData.get("newIll")
-        const newMed = formData.get("newMed")
-        if (newAge !== "") {
-            await setDoc(doc(db, "Informations", router.query.patId), {
-                patientName: patName,
-                birthDate: newAge,
-                medicines: meds,
-                imageType: imageType,
-                imageSrc: imageSrc,
-                illness: ill,
-                message: msg
-            })
-            document.location.reload()
-        }
-        if (newIll !== "") {
-            ill.push(newIll)
-            await setDoc(doc(db, "Informations", router.query.patId), {
-                patientName: patName,
-                birthDate: age,
-                medicines: meds,
-                imageType: imageType,
-                imageSrc: imageSrc,
-                illness: ill,
-                message: msg
-            })
-            setTimeout(() => {
-                document.location.reload()
-            }, 500);
-        }
-        if (newMed !== "") {
-            meds.push(newMed)
-            await setDoc(doc(db, "Informations", router.query.patId), {
-                patientName: patName,
-                birthDate: age,
-                medicines: meds,
-                imageType: imageType,
-                imageSrc: imageSrc,
-                illness: ill,
-                message: msg
-            })
-            setTimeout(() => {
-                document.location.reload()
-            }, 500);
-        }
-        if (newMsg.trim() !== msg) {
-            await setDoc(doc(db, "Informations", router.query.patId), {
-                patientName: patName,
-                birthDate: age,
-                medicines: meds,
-                imageType: imageType,
-                imageSrc: imageSrc,
-                illness: ill,
-                message: newMsg
-            })
-            document.location.reload()
-        }
-    };
-
-    // !
-
-    //* Show edit field 
-    const showEditHandler = e => {
-        const parent = e.target.parentElement
-        let bool = parent.classList.contains('editTrue')
-        if (!bool) {
-
-            parent.classList.add("d-block")
-            setTimeout(() => {
-                parent.classList.add("editTrue")
-            }, 1000);
-        }
-        else {
-            parent.classList.remove("editTrue")
-            setTimeout(() => {
-                parent.classList.remove("d-block")
-            }, 1000);
-        }
-
-    }
-    const showEditHandlerIll = e => {
-        const parent = e.target.parentElement
-        let bool = parent.classList.contains('editTrue')
-        if (!bool && !edit) {
-            setEdit(true)
-            parent.classList.add("d-block")
-            setTimeout(() => {
-                parent.classList.add("editTrue")
-            }, 1000);
-        }
-        else {
-            setEdit(false)
-            parent.classList.remove("editTrue")
-            setTimeout(() => {
-                parent.classList.remove("d-block")
-            }, 1000);
-        }
-
-    }
-    // !
-
-    const deleteDocIll = async (e) => {
-        var id = e.target.id;
-        e.target.remove()
-        const index = ill.indexOf(id)
-        if (index > -1) {
-            ill.splice(index, 1)
-        }
-        await setDoc(doc(db, "Informations", router.query.patId), {
-            patientName: patName,
-            birthDate: age,
-            medicines: meds,
-            imageType: imageType,
-            imageSrc: imageSrc,
-            illness: ill,
-            message: msg
-        })
-        document.location.reload()
-    }
     //*Logout user
     const logOutHandler = () => {
         const token = localStorage.getItem("Token")
@@ -268,49 +95,13 @@ const ShowPatient = () => {
         else router.push("/")
     }
 
-
-    //* New patient pic handler
-    const patPicHandler = async () => {
-        if (base64String !== "" || base64String == undefined && extension !== undefined) {
-            editBtn ? setEditBtn(false) : setEditBtn(true)
-            setSrc(`data:${extension};base64,${base64String}`)
-            setImageSrc(base64String)
-            await setDoc(doc(db, "Informations", router.query.patId), {
-                patientName: patName,
-                birthDate: age,
-                medicines: meds,
-                imageType: extension,
-                imageSrc: base64String,
-                illness: ill,
-                message: msg
-            })
-        }
-    }
-
-    //!
-    //* Delete patient pic handler
-    const deletePicHandler = async () => {
-        editBtn ? setEditBtn(false) : setEditBtn(true)
-        setSrc("")
-        setImageSrc("")
-        await setDoc(doc(db, "Informations", router.query.patId), {
-            patientName: patName,
-            birthDate: age,
-            medicines: meds,
-            imageType: "",
-            imageSrc: "",
-            illness: ill,
-            message: msg
-        })
-    }
-
     //* Modal handler
     const modalCloseHandler = () => {
         document.body.classList.remove("overflow-hidden")
         setModal(false)
     }
 
-    //* Delete all information
+    // //* Delete all information
     const deletePatientHandler = async () => {
         const userDoc = doc(db, "Informations", router.query.patId)
         await deleteDoc(userDoc)
@@ -321,29 +112,15 @@ const ShowPatient = () => {
     return (
         <>
             <DeleteModal show={modal} ModalClose={modalCloseHandler} deleteHandler={deletePatientHandler} />
-            <Navbar logOutHandler={logOutHandler} />
-            <form className="exact-patient" onSubmit={submitGeneral}>
+            <Navbar logOutHandler={logOutHandler} headingContent={patName} />
+            <section className="exact-patient">
                 <div className="d-flex flex-exact-img">
                     {imageSrc !== "" ?
-                        <img src={src} alt={patName} id="patPic" />
+                        <img src={src} alt={patName} id="patPic" className="exactpat-img" />
                         :
-                        <strong className="reason">There is no picture
-                            <input type="file" className="file-inp" id="patNewPic" value={file}
-                                onChange={fileHandler} ref={inpFile}
-                            />
-                            <label className="edit-doc r-0" htmlFor="patNewPic" onClick={() => {
-                                btnSaveRef.current.classList.remove("hidden")
-                                setEditBtn(true)
-                            }
-                            }>
-                            </label>
-                        </strong>
+                        <Image src={AddUser} width="70px" height="70px" alt={patName} className="no-img" />
                     }
 
-
-                    {editBtn ? <button className="btn edit-btn hidden" ref={btnSaveRef} type="button" onClick={patPicHandler}>save</button> :
-                        <button className="btn btn-delete delete-pic my-1" type="button" onClick={deletePicHandler}>Delete picture</button>
-                    }
                 </div>
                 <h2><span className="name">Name: </span>{patName}</h2>
                 <section className="d-grid-exact">
@@ -352,13 +129,9 @@ const ShowPatient = () => {
                         age !== "" ? (
                             <div className="d-flex flex-exact my-1">
                                 <strong className="reason">Patient Age
-                                    <span className="edit-doc" onClick={e => showEditHandler(e)}></span>
                                 </strong>
                                 <p>{result}</p>
-                                <div className="edit transition">
-                                    <input type="date" className="input input-info" name="newAge" />
-                                    <button className="btn edit-btn" type="submit">save</button>
-                                </div>
+
                             </div>
                         ) : <strong className="reason">َAge isn&apos;t entered</strong>
                     }
@@ -368,35 +141,17 @@ const ShowPatient = () => {
                         {ill.length !== 0 ? (
                             <>
                                 <strong className="reason">Patient illness
-                                    <span className="edit-doc" onClick={showEditHandlerIll}></span>
                                 </strong>
-                                {!edit && <ul className="ul-med">
+                                <ul className="ul-med">
                                     {ill.map(item => <li key={item} id={item}>{item}</li>)}
-                                </ul>}
-                                {edit && <ul onClick={e => deleteDocIll(e)} className="ul-med">
-                                    {
-                                        ill.map(item => <li key={item} id={item} onClick={e => deleteDocIll(e)} className="li-med">{item}</li>)
-                                    }
-
-                                </ul>}
+                                </ul>
                             </>
                         ) :
                             <>
                                 <strong className="reason">Ill isn&apos;t entered
-                                    <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                             </>
                         }
-                        <div className="edit transition">
-                            <input
-                                className="input input-info"
-                                placeholder="New illness or for delete illness now click"
-                                type="text"
-                                name="newIll"
-                            />
-                            <button className="btn edit-btn" type="submit">save</button>
-
-                        </div>
                     </div>
 
 
@@ -405,61 +160,44 @@ const ShowPatient = () => {
                         {meds.length !== 0 ?
                             <>
                                 <strong className="reason">Patient medicines
-                                    <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                                 <ul className="ul-med">{
-                                    meds.map(item => <li className="li-med" key={item} id={item} onClick={(e) => updateDocMed(e)}>{item}</li>
+                                    meds.map(item => <li key={item} id={item}>{item}</li>
                                     )
                                 }</ul>
                             </>
                             : <>
                                 <strong className="reason">
                                     There are no medicines
-                                    <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                             </>}
-                        <div className="edit transition">
-                            <input
-                                className="input input-info"
-                                placeholder="Add new medicine"
-                                type="text"
-                                name="newMed"
-                            />
-                            <button className="btn edit-btn" type="submit">save</button>
-                        </div>
                     </div>
 
                     <div className="d-flex flex-exact my-1">
                         {msg !== "" ? (
                             <>
                                 <strong className="reason">Specific message
-                                    <span className="edit-doc" onClick={showEditHandler}></span>
                                 </strong>
                                 <p>{msg}</p>
                             </>
                         ) : <strong className="reason">There isnt any specific message
-                            <span className="edit-doc" onClick={showEditHandler}></span>
                         </strong>}
-                        <div className="edit transition">
-                            <input
-                                className="input input-info"
-                                placeholder="Add message"
-                                type="text"
-                                value={newMsg}
-                                onChange={e => setNewMsg(e.target.value)}
-                                name="newMsg"
-                            />
-                            <button className="btn edit-btn" type="submit">save</button>
-
-                        </div>
                     </div>
                 </section>
-                <button className="btn btn-delete delete-all" type="button" onClick={() => {
-                    setModal(true)
-                    document.body.classList.add("overflow-hidden")
-                }
-                }>Delete patient infos</button>
-            </form>
+
+                <div className="exact-btn-container">
+                    <button className="btn btn-delete delete-all" type="button" onClick={() => {
+                        setModal(true)
+                        document.body.classList.add("overflow-hidden")
+                    }
+                    }>Delete patient infos</button>
+                    <Link href={`/informations/edit/${router.query.patId}`}>
+                        <button className="btn btn-info">
+                            Edit Info
+                        </button>
+                    </Link>
+                </div>
+            </section>
         </>
 
     )

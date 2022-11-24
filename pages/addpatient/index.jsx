@@ -17,7 +17,7 @@ const MainPatient = () => {
 
     return (
         <>
-            <Navbar logOutHandler={logOutHandler} />
+            <Navbar logOutHandler={logOutHandler} headingContent="Add patient" />
             <Addpatient />
         </>
     )

@@ -34,10 +34,12 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
-    background-image: url('../assets/Images/check.jpg');
+    /* background-image: url('../assets/Images/check.jpg'); */
+    background-image: url('../assets/Images/Light-bg.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    transition: background .6s ease;
 }
 
 /* * Body modal open styles */
@@ -116,17 +118,13 @@ a {
 /* ! */
 /* ? Heading styles */
 .welcome-message {
-    position: absolute;
-    top: 28px;
-    text-align: center;
-    width: 100%;
     color: var(--white);
     letter-spacing: 2px;
     text-transform: uppercase;
-}
-
-.welcome {
-    animation: fsize 2s ease infinite alternate;
+    width: 85%;
+    text-align: center;
+    margin: auto;
+    padding: .4em 0 0 0;
 }
 
 /* * Define animation */
@@ -136,7 +134,7 @@ a {
     }
 
     to {
-        font-size: 2em;
+        font-size: 1.8em;
     }
 }
 
@@ -181,7 +179,15 @@ a {
     background-color: var(--red) !important;
 }
 
-.exact-patient>.delete-all {
+.exact-btn-container {
+    max-width: 30em;
+    margin: .8em auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.exact-btn-container>.delete-all {
     width: 10em;
     height: 28px;
 }
@@ -193,6 +199,10 @@ a {
     box-shadow: unset;
     transition: color .6s ease;
     border: none;
+}
+
+.button-container>.btn-cancel::before {
+    all: unset;
 }
 
 .backdrop {
@@ -245,17 +255,24 @@ a {
     min-height: 45px;
     height: auto;
     flex-wrap: wrap;
+    transition: background .7s ease;
 }
 
 .navbar>.hamburger-container {
     display: none;
 }
 
-.navbar>.welcome-message {
-    position: inherit;
+.navbar>.welcome-msg-container>.welcome-message {
+    padding: 0;
+}
+
+.welcome-msg-container {
+    margin-left: -190px;
+}
+
+.welcome-msg-container>.welcome-message {
     width: unset;
     color: var(--black);
-    margin-right: 156px;
 }
 
 .nav-ul {
@@ -341,8 +358,27 @@ a {
 }
 
 .absolute-toggle {
-    right: 3px;
-    top: 3px;
+    right: 10px;
+    top: 10px;
+}
+
+
+.absolute-toggle>.toggler>.toggle-label>.toggle-span {
+    background-color: var(--bg-color);
+}
+
+
+.absolute-toggle>.toggler>.toggle-label {
+    --white: #e0e0e0;
+    background-color: var(--white);
+}
+
+.absolute-toggle>.toggler>.toggle-label>.toggle-span-after {
+    background-color: var(--white);
+}
+
+.absolute-toggle>.toggler>.toggle-label-after {
+    background-color: var(--bg-color);
 }
 
 /* ! */
@@ -352,7 +388,7 @@ a {
 .container {
     display: grid;
     place-content: center;
-    height: 100vh;
+    height: 90vh;
 }
 
 .main-form {
@@ -377,7 +413,7 @@ a {
     border-bottom-color: var(--border-color);
     height: 24px;
     background: transparent;
-    padding: .7em;
+    padding: 1em;
     font-size: .9em;
     transition: all .5s ease;
 }
@@ -390,11 +426,10 @@ a {
 }
 
 .input:focus {
-    border-right-color: var(--border-color);
-    border-left-color: var(--border-color);
+    border-color: var(--border-color);
     border-radius: 5px;
     border-left-width: .2em;
-    padding-left: .3em;
+    padding-left: .7em;
 }
 
 .form-label {
@@ -412,6 +447,13 @@ a {
 .input:focus+.form-label,
 .label-active {
     transform: translate(28px, 0);
+}
+
+.input:focus+.form-label,
+.label-active,
+.label-info-active,
+.input-date:focus+label.label-info {
+    font-size: .9em;
 }
 
 .input:focus::placeholder {
@@ -624,6 +666,16 @@ a {
     transition: height .4s ease;
 }
 
+.edit>.ul-med>li:last-child {
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: .7em;
+}
+
+.edit>.ul-med>li {
+    width: 95%;
+    margin: auto;
+}
+
 .container-infos {
     max-width: 500px;
     margin: 1em auto;
@@ -661,7 +713,7 @@ textarea.input-info,
 
 .input-info:focus {
     border-color: var(--inpInfo-border);
-    border-top-color: transparent;
+    /* border-top-color: transparent; */
 }
 
 .input-info::placeholder {
@@ -788,8 +840,12 @@ input.file-inp {
     width: 30px;
 }
 
-.input-date+label.label-info {
+.input-date+.label-info {
     transform: translate(60px, 0);
+}
+
+.input-date+label.label-info {
+    transform: translate(50px, 0) !important;
 }
 
 /* ! */
@@ -811,15 +867,16 @@ input.file-inp {
     text-align: center;
     padding: .7em;
     position: relative;
-    transition: box-shadow .5s ease;
     border-radius: 15px;
     height: 100%;
     overflow: hidden;
+    transition: background .7s ease, box-shadow .5s ease;
 }
 
 .showpat-container>h3 {
     margin-top: -10px;
     margin-bottom: 15px;
+    transition: color .7s ease;
 }
 
 .showpat-container::before {
@@ -881,29 +938,6 @@ input.file-inp {
     border-radius: 15px;
 }
 
-
-.d-block~.edit {
-    display: block;
-}
-
-.edit {
-    visibility: hidden;
-    opacity: 0;
-    padding: .5em 0;
-    display: none
-}
-
-.edit>.input-info::placeholder,
-.edit>.input-info {
-    opacity: 1;
-    visibility: visible;
-}
-
-.edit>.input-info::placeholder,
-.edit>.input-info {
-    color: var(--black);
-}
-
 .reason {
     color: var(--black);
     font-size: 1.1em;
@@ -942,7 +976,7 @@ input.file-inp {
     margin-top: .5em;
 }
 
-.exact-patient img {
+.exactpat-img {
     max-width: 100px;
     max-height: 115px;
 }
@@ -957,36 +991,6 @@ input.file-inp {
 
 .span-med {
     display: block;
-}
-
-.edit-doc {
-    display: inline-block;
-    background-image: url('../assets/Images/edit.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right: 30px;
-    cursor: pointer;
-    bottom: 0;
-}
-
-.r-0 {
-    right: -30px;
-}
-
-.editTrue~.edit {
-    visibility: visible;
-    opacity: 1;
-}
-
-.edit-btn {
-    display: block;
-    width: 4em;
-    margin: .5em auto 0 auto;
-    transition: color .8s linear, visibility .5s ease, opacity .5s linear;
 }
 
 
@@ -1039,4 +1043,54 @@ input.file-inp {
 
 .ham-after::before {
     transform: rotate(45deg) translate(3px, 2px);
+}
+
+/* ! */
+/* ? Edit section */
+.save-btn {
+    width: 7em;
+}
+
+.save-btn::before {
+    --success: #00a25c;
+    background: var(--success);
+}
+
+.container-img {
+    max-width: 200px;
+    margin: auto;
+    text-align: center;
+}
+
+.delete-icon {
+    position: absolute;
+    background-size: cover;
+    background-image: url('../assets/Images/Delete-Bin-PNG.png');
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+}
+
+/* ? Sign in section */
+.section-signin {
+    min-height: 250px;
+}
+
+.create-msg {
+    text-align: center;
+    color: var(--black);
+}
+
+.form-signin {
+    width: 100%;
+    height: 100%;
+}
+
+.form-signin>small {
+    margin-left: 2em;
+    color: var(--black);
+    cursor: pointer;
+    transition: color .6s ease;
 }
