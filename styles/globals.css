@@ -322,7 +322,7 @@ a {
     padding: 2.5px;
     height: 25px;
     cursor: pointer;
-    transition: background .5s linear
+    transition: background .5s linear, box-shadow .6s ease
 }
 
 .switch {
@@ -363,22 +363,8 @@ a {
 }
 
 
-.absolute-toggle>.toggler>.toggle-label>.toggle-span {
-    background-color: var(--bg-color);
-}
-
-
-.absolute-toggle>.toggler>.toggle-label {
-    --white: #e0e0e0;
-    background-color: var(--white);
-}
-
-.absolute-toggle>.toggler>.toggle-label>.toggle-span-after {
-    background-color: var(--white);
-}
-
 .absolute-toggle>.toggler>.toggle-label-after {
-    background-color: var(--bg-color);
+    box-shadow: 0 0 5px 1px;
 }
 
 /* ! */

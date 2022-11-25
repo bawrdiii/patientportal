@@ -6,7 +6,7 @@ body.dark {
 }
 
 .dark .main-form {
-    --dark: #5555;
+    --dark: #777;
     background-color: var(--dark);
 }
 
@@ -116,7 +116,7 @@ body.dark {
 
 
 .dark .showpat-container {
-    --bg-color: #6666;
+    --bg-color: #666666db;
     background-color: var(--bg-color);
 }
 
@@ -126,7 +126,7 @@ body.dark {
 }
 
 .dark .showpat-container::before {
-    --bg-color: #888;
+    --bg-color: #666;
     background-color: var(--bg-color);
 }
 
