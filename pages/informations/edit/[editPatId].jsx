@@ -48,7 +48,7 @@ const ExactPatEdit = () => {
                 setNewPatAge(result.birthDate)
                 setIlls(result.illness)
                 setMeds(result.medicines)
-                setNewMessage(`${result.message} `)
+                result.message !== "" ? setNewMessage(`${result.message} `) : setNewMessage(`${result.message}`)
                 setImgType(result.imageType)
                 setImgsrc(result.imageSrc)
                 setSrc(`data:${result.imageType};base64,${result.imageSrc}`)

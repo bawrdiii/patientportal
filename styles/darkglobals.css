@@ -131,6 +131,7 @@ body.dark {
 }
 
 .dark .nopat-info {
+    --bg-color: #252525;
     background-color: var(--bg-color);
     color: var(--purple)
 }
