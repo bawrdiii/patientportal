@@ -21,9 +21,12 @@ const MainIndex = () => {
     const labelRef = useRef()
     // * UseEffect 
     useEffect(() => {
+        console.log(dark);
         var token = localStorage.getItem("Token")
-        const labelDom = document.querySelector(".toggle-label")
-        const spanDom = document.querySelector(".toggle-span")
+        // const labelDom = document.querySelector(".toggle-label")
+        const labelDom = labelRef.current;
+        // const spanDom = document.querySelector(".toggle-span")
+        const spanDom = spanRef.current;
         var theme = localStorage.getItem("Theme")
         if (token) {
             setAdmin(true)
@@ -31,7 +34,7 @@ const MainIndex = () => {
         else {
             setAdmin(false)
         }
-        if (spanDom && labelDom) {
+        if (labelDom && spanDom) {
             if (theme === "Light") {
                 setDark(false)
                 spanDom.classList.remove("toggle-label-after")
@@ -39,6 +42,7 @@ const MainIndex = () => {
                 document.body.classList.remove("dark")
             }
             else if (theme === "Dark") {
+                console.log(`darke`);
                 setDark(true)
                 spanDom.classList.add("toggle-span-after")
                 labelDom.classList.add("toggle-label-after")
@@ -52,7 +56,7 @@ const MainIndex = () => {
                 localStorage.setItem("Theme", "Dark")
             }
         }
-    }, [])
+    })
 
 
     //* Checking value
