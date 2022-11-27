@@ -27,6 +27,7 @@ const Addpatient = () => {
     const medLabel = useRef()
     const ulMed = useRef()
     const ulIll = useRef()
+    const patNameRef = useRef()
 
     var extension, base64String = '';
 
@@ -87,8 +88,6 @@ const Addpatient = () => {
 
             fileReader.readAsDataURL(file[0])
         }
-        console.log(extension);
-
     }
 
     const dateHandler = e => {
@@ -100,6 +99,7 @@ const Addpatient = () => {
         e.preventDefault()
         if (patName === "") {
             setLoading(false)
+            setError(patNameRef.current, "This field is necessary")
             return
         }
         if (base64String !== "" || undefined && extension !== "" || undefined &&
@@ -176,6 +176,17 @@ const Addpatient = () => {
         })
     }
 
+    const setError = (input, message) => {
+        if (input) {
+            const formControl = input.parentElement;
+            const small = formControl.querySelector("small")
+            small.innerText = message
+
+            formControl.classList.add("form-error")
+            formControl.classList.remove("form-success");
+        }
+
+    };
 
     return (
         <>
@@ -191,12 +202,14 @@ const Addpatient = () => {
                                 className="input input-info"
                                 value={patName}
                                 onChange={(e) => onChangeGeneral(e, setPatName, labelNameRef)}
+                                ref={patNameRef}
                             />
                             <label
                                 htmlFor="patient-name"
                                 className="form-label label-info"
                                 ref={labelNameRef}
                             >Patient Name</label>
+                            <small className="error-small error-small-name"></small>
                         </div>
                         <div className="d-flex flex-form my-1">
                             <input
