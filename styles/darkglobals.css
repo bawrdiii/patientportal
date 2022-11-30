@@ -82,7 +82,7 @@ body.dark {
 }
 
 .dark .input {
-    color: var(--white);
+    color: var(--white-dark);
 }
 
 .dark .main-form .input::placeholder {
@@ -108,6 +108,10 @@ body.dark {
 
 .dark .btn-delete::before {
     background-color: var(--red);
+}
+
+.dark .input-info {
+    border-bottom-color: var(--white-dunkel);
 }
 
 .dark .input-info:focus {
@@ -155,7 +159,7 @@ body.dark {
 
 .dark .exact-patient,
 .dark .ul-med {
-    color: var(--purple);
+    color: var(--white-dark);
 }
 
 .dark .name,
@@ -164,7 +168,10 @@ body.dark {
 }
 
 
-.dark .edit>.input-info::placeholder,
+.dark .input-info::placeholder {
+    color: var(--white-dunkel);
+}
+
 .dark .edit>.input-info {
     color: var(--white);
 }
@@ -187,6 +194,10 @@ body.dark {
 
 .dark .form-signin>small {
     color: var(--white-dunkel);
+}
+
+.dark .search-container {
+    background-color: var(--bg-color);
 }
 
 @media (max-width:768px) {

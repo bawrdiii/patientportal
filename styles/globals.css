@@ -378,6 +378,7 @@ a {
 }
 
 .main-form {
+    min-height: 208.63px;
     padding: .4em;
     width: 300px;
     max-width: 300px;
@@ -388,6 +389,7 @@ a {
 .flex-form {
     flex-direction: column-reverse;
     margin: .3em 0;
+    min-height: 56px;
 }
 
 .input {
@@ -660,8 +662,12 @@ a {
     transition: height .4s ease;
 }
 
+.form-patient-info .flex-form:nth-child(7) {
+    min-height: 94px;
+}
+
 .edit>.ul-med>li:last-child {
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid var(--white-dunkel);
     padding-bottom: .7em;
 }
 
@@ -866,7 +872,7 @@ input.file-inp {
     padding: .4em .7em .7em;
     position: relative;
     border-radius: 15px;
-    height: 100%;
+    min-height: 208.26px;
     overflow: hidden;
     transition: background .7s ease, box-shadow .5s ease;
 }
@@ -908,6 +914,7 @@ input.file-inp {
     --white: #fffff1dc;
     width: 30em;
     margin: 4em auto;
+    min-height: unset;
 }
 
 .nopat-info:hover {
@@ -1089,4 +1096,16 @@ input.file-inp {
     color: var(--black);
     cursor: pointer;
     transition: color .6s ease;
+}
+
+/* ! */
+/* ? Search container */
+.search-container {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #5555;
+    padding: .5em 0 1em 0;
+    border-radius: 15px;
+    min-height: 78.63px;
 }

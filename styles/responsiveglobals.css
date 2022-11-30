@@ -267,6 +267,10 @@
         right: 40px;
     }
 
+    .search-container {
+        max-width: 80%;
+    }
+
 }
 
 @media (min-width:427px) and (max-width:767px) {
