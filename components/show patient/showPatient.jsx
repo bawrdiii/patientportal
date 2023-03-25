@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { deleteDoc, doc, getDoc } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { db } from "../firebaseconfig/firebaseconfig"
 import Navbar from "../navbar/navbar"
 import DeleteModal from "../UI/modal/deleteModal"
@@ -19,9 +19,6 @@ const ShowPatient = () => {
     const [msg, setMsg] = useState('')
     const [imageSrc, setImageSrc] = useState('')
     const [modal, setModal] = useState(false)
-
-    //* Declaring variables
-    var result
 
     const router = useRouter()
 
@@ -78,12 +75,13 @@ const ShowPatient = () => {
             var finalMonth = mm - umm
             var finalDay = dd - udd
 
-            result = `Patient is ${finalYear} years and ${finalMonth} months and ${finalDay} days old`
+          let result = `Patient is ${finalYear} years and ${finalMonth} months and ${finalDay} days old`
 
         }
         return result
     }
-    birthHandler()
+    
+   const patientAge = useMemo(() =>  birthHandler(), [age]);
 
     //*Logout user
     const logOutHandler = () => {
@@ -130,7 +128,7 @@ const ShowPatient = () => {
                             <div className="d-flex flex-exact my-1">
                                 <strong className="reason">Patient Age
                                 </strong>
-                                <p>{result}</p>
+                                <p>{patientAge}</p>
 
                             </div>
                         ) : <strong className="reason">َAge isn&apos;t entered</strong>
